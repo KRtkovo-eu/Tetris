@@ -20,9 +20,9 @@ namespace Tetris
             {
                 if (x != null)
                 {
-                    if (x.BackColor == Color.LightGray)
+                    if (x.BackColor == (pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor))
                     {
-                        x.BackColor = Color.White;
+                        x.BackColor = TetrisColors.backgroundColor;
                     }
                 }
             }
@@ -43,35 +43,35 @@ namespace Tetris
                     {
                         if (x == 2)
                         {
-                            Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
+                            Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
                         }
                         else
                         {
-                            Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                            Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 2);
-                            Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 3);
+                            Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                            Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 2);
+                            Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 3);
                         }
                     }
                     else if (rotations == 1)
                     {
                         if (x == 2) //ignore
                         {
-                            Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
+                            Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
                         }
 
                         else //problem
                         {
-                            Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                            Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                            Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                            Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                            Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                            Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                            Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                            Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                         }
                     }
                 }
@@ -79,134 +79,134 @@ namespace Tetris
                 {
                     if (rotations == 0)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 2);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 2);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                     else if (rotations == 1)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 1);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 1);
                     }
                     else if (rotations == 2)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 2);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 2);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 2);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 2);
                     }
                     else if (rotations == 3)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 1);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 1);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                 }
                 else if (currentPiece == 2) // J piece
                 {
                     if (rotations == 0)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 2);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 2);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                     else if (rotations == 1)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 1);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 1);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                     else if (rotations == 2)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 2);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 2);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 2);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 2);
                     }
                     else if (rotations == 3)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 1);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 1);
                     }
                 }
                 else if (currentPiece == 3) // S piece
                 {
                     if (rotations == 0)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 1);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 1);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 1);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 1);
                     }
                     else if (rotations == 1)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 2);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 1);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 2);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 1);
                     }
                 }
                 else if (currentPiece == 4) // Z piece
                 {
                     if (rotations == 0)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                     else if (rotations == 1)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 1);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 2);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 1);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 2);
                     }
                 }
                 else if (currentPiece == 5) // O piece
                 {
-                    Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                    Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                    Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                    Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                    Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                    Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                    Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                    Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                 }
                 else if (currentPiece == 6) //T piece
                 {
                     if (rotations == 0)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                     else if (rotations == 1)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 2);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 2);
                     }
                     else if (rotations == 2)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x - 1);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x - 1);
                     }
                     else if (rotations == 3)
                     {
-                        Ghost2[0] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[0]), x - 1);
-                        Ghost2[1] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[1]), x - 1);
-                        Ghost2[2] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[2]), x - 2);
-                        Ghost2[3] = grid.GetControlFromPosition(grid.GetColumn(Ghost2[3]), x);
+                        Ghost2[0] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[0]), x - 1);
+                        Ghost2[1] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[1]), x - 1);
+                        Ghost2[2] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[2]), x - 2);
+                        Ghost2[3] = gridPanel.GetControlFromPosition(gridPanel.GetColumn(Ghost2[3]), x);
                     }
                 }
 
@@ -215,10 +215,10 @@ namespace Tetris
                 {
                     // If all squares in test Ghost2 are white,
                     if (
-                        (Ghost2[0].BackColor == Color.White | activePiece.Contains(Ghost2[0])) &
-                        (Ghost2[1].BackColor == Color.White | activePiece.Contains(Ghost2[1])) &
-                        (Ghost2[2].BackColor == Color.White | activePiece.Contains(Ghost2[2])) &
-                        (Ghost2[3].BackColor == Color.White | activePiece.Contains(Ghost2[3]))
+                        (Ghost2[0].BackColor == TetrisColors.backgroundColor | activePiece.Contains(Ghost2[0])) &
+                        (Ghost2[1].BackColor == TetrisColors.backgroundColor | activePiece.Contains(Ghost2[1])) &
+                        (Ghost2[2].BackColor == TetrisColors.backgroundColor | activePiece.Contains(Ghost2[2])) &
+                        (Ghost2[3].BackColor == TetrisColors.backgroundColor | activePiece.Contains(Ghost2[3]))
                         )
                     {
 
@@ -242,11 +242,11 @@ namespace Tetris
                 {
 
                     //Not all squares white
-                    if (Ghost2[0].BackColor != Color.White | Ghost2[1].BackColor != Color.White | Ghost2[2].BackColor != Color.White | Ghost2[3].BackColor != Color.White)
+                    if (Ghost2[0].BackColor != TetrisColors.backgroundColor | Ghost2[1].BackColor != TetrisColors.backgroundColor | Ghost2[2].BackColor != TetrisColors.backgroundColor | Ghost2[3].BackColor != TetrisColors.backgroundColor)
                     {
 
                         //Is falling piece below x?
-                        if (grid.GetRow(activePiece[0]) >= x | grid.GetRow(activePiece[1]) >= x | grid.GetRow(activePiece[2]) >= x | grid.GetRow(activePiece[3]) >= x)
+                        if (gridPanel.GetRow(activePiece[0]) >= x | gridPanel.GetRow(activePiece[1]) >= x | gridPanel.GetRow(activePiece[2]) >= x | gridPanel.GetRow(activePiece[3]) >= x)
                         {
                             continue;
                         }
@@ -268,7 +268,7 @@ namespace Tetris
             {
                 for (int x = 0; x < 4; x++)
                 {
-                    Ghost[x].BackColor = Color.LightGray;
+                    Ghost[x].BackColor = pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor;
                 }
             }
         }

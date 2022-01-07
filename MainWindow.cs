@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Tetris
@@ -18,26 +19,26 @@ namespace Tetris
         int timeElapsed = 0;
         int currentPiece;
         int nextPieceInt;
-        int savedPieceInt = -1;
         int rotations = 0;
-        Color pieceColor = Color.White;
-        Color savedPieceColor = Color.White;
+        Color pieceColor = TetrisColors.backgroundColor;
+        Color savedPieceColor = TetrisColors.backgroundColor;
         int combo = 0;
         int score = 0;
         int clears = 0;
         int level = 0;
         bool gameOver = false;
+        bool gameRunning = false;
         int PieceSequenceIteration = 0;
 
         readonly Color[] colorList = 
         {  
-            Color.Cyan,     // I piece
-            Color.Orange,   // L piece
-            Color.Blue,     // J piece
-            Color.Green,    // S piece
-            Color.Red,      // Z piece
-            Color.Yellow,   // O piece
-            Color.Purple    // T piece
+            TetrisColors.pieceI, // I piece
+            TetrisColors.pieceL, // L piece
+            TetrisColors.pieceJ, // J piece
+            TetrisColors.pieceS, // S piece
+            TetrisColors.pieceZ, // Z piece
+            TetrisColors.pieceO, // O piece
+            TetrisColors.pieceT  // T piece
         };
 
         // Load main window
@@ -45,9 +46,69 @@ namespace Tetris
         {
             InitializeComponent();
 
-            ScoreUpdateLabel.Text = "";
+            ResizeRedraw = true;
+            DoubleBuffered = true;
+
+            ChangeTetrisBackground(level);
+        }
+
+        private void MainWindow_Shown(object sender, EventArgs e)
+        {
+            if (new AboutWindow().ShowDialog() == DialogResult.OK)
+            {
+                //StartNewGame(level);
+                startingLevelTextBox.Text = "0";
+            }
+        }
+
+        public void StartNewGame(int startingLevel)
+        {
+            TerminateGame(forceHideDialog: true);
+
+            // Reset game area
+            foreach(TetrisBlock tetrisBlock in gridPanel.Controls)
+            {
+                tetrisBlock.BackColor = TetrisColors.backgroundColor;
+            }
+
+            // Reset block preview area
+            foreach (TetrisBlock tetrisBlock in nextTetrisBlockPanel.Controls)
+            {
+                tetrisBlock.BackColor = TetrisColors.backgroundColor;
+            }
+
+            // Reset checking variables
+            SpeedTimer.Interval = 800;
+            gameRunning = true;
+            gameOver = false;
+            level = 0;
+            for(int i=0; i < startingLevel; i++)
+            {
+                LevelUp(isLoopingBeforeStart: true); ;
+            }
+
+            combo = 0;
+            score = 0;
+            clears = 0;
+
+            timeElapsed = 0;
+            currentPiece = 0;
+            nextPieceInt = 0;
+            rotations = 0;
+
+            ScoreLabel.Text = score.ToString();
+            LevelLabel.Text = level.ToString();
+            ScoreUpdateLabel.Text = score.ToString();
+            ClearsLabel.Text = clears.ToString();
+            TimeLabel.Text = timeElapsed.ToString();
+
+            ChangeTetrisBackground(level);
+
+            //ScoreUpdateLabel.Text = "";
             SpeedTimer.Start();
             GameTimer.Start();
+
+            SoundEffects.PlayMusic();
 
             // Initialize/reset ghost piece
             // box1 through box4 are invisible
@@ -109,7 +170,7 @@ namespace Tetris
             {
                 foreach (Control x in nextPiece)
                 {
-                    x.BackColor = Color.White;
+                    x.BackColor = TetrisColors.backgroundColor;
                 }
             }
 
@@ -164,13 +225,10 @@ namespace Tetris
             // Check for game over
             foreach (Control box in activePiece)
             {
-                if (box.BackColor != Color.White & box.BackColor != Color.LightGray)
+                if (box.BackColor != TetrisColors.backgroundColor & box.BackColor != (pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor))
                 {
                     //Game over!
-                    SpeedTimer.Stop();
-                    GameTimer.Stop();
-                    gameOver = true;
-                    MessageBox.Show("Game over!");
+                    TerminateGame();
                     return;
                 }
             }
@@ -200,34 +258,34 @@ namespace Tetris
             // Determine highest, lowest, left, and right rows of potential move
             foreach (Control square in activePiece)
             {
-                if (grid.GetRow(square) < currentHighRow)
+                if (gridPanel.GetRow(square) < currentHighRow)
                 {
-                    currentHighRow = grid.GetRow(square);
+                    currentHighRow = gridPanel.GetRow(square);
                 }
-                if (grid.GetRow(square) > currentLowRow)
+                if (gridPanel.GetRow(square) > currentLowRow)
                 {
-                    currentLowRow = grid.GetRow(square);
+                    currentLowRow = gridPanel.GetRow(square);
                 }
-                if (grid.GetColumn(square) < currentLeftCol)
+                if (gridPanel.GetColumn(square) < currentLeftCol)
                 {
-                    currentLeftCol = grid.GetColumn(square);
+                    currentLeftCol = gridPanel.GetColumn(square);
                 }
-                if (grid.GetColumn(square) > currentRightCol)
+                if (gridPanel.GetColumn(square) > currentRightCol)
                 {
-                    currentRightCol = grid.GetColumn(square);
+                    currentRightCol = gridPanel.GetColumn(square);
                 }
             }
 
             // Test if any squares would be outside of grid
             foreach (Control square in activePiece)
             {
-                int squareRow = grid.GetRow(square);
-                int squareCol = grid.GetColumn(square);
+                int squareRow = gridPanel.GetRow(square);
+                int squareCol = gridPanel.GetColumn(square);
 
                 // Left
                 if (direction == "left" & squareCol > 0)
                 {
-                    newSquare = grid.GetControlFromPosition(squareCol - 1, squareRow);
+                    newSquare = gridPanel.GetControlFromPosition(squareCol - 1, squareRow);
                     nextSquare = currentLeftCol;
                 }
                 else if (direction == "left" & squareCol == 0)
@@ -239,7 +297,7 @@ namespace Tetris
                 // Right
                 else if (direction == "right" & squareCol < 9)
                 {
-                    newSquare = grid.GetControlFromPosition(squareCol + 1, squareRow);
+                    newSquare = gridPanel.GetControlFromPosition(squareCol + 1, squareRow);
                     nextSquare = currentRightCol;
                 }
                 else if (direction == "right" & squareCol == 9)
@@ -251,7 +309,7 @@ namespace Tetris
                 // Down
                 else if (direction == "down" & squareRow < 21)
                 {
-                    newSquare = grid.GetControlFromPosition(squareCol, squareRow + 1);
+                    newSquare = gridPanel.GetControlFromPosition(squareCol, squareRow + 1);
                     nextSquare = currentLowRow;
                 }
                 else if (direction == "down" & squareRow == 21)
@@ -261,7 +319,7 @@ namespace Tetris
                 }
 
                 // Test if potential move would overlap another piece
-                if ((newSquare.BackColor != Color.White & newSquare.BackColor != Color.LightGray) & activePiece.Contains(newSquare) == false & nextSquare > 0)
+                if ((newSquare.BackColor != TetrisColors.backgroundColor & newSquare.BackColor != (pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor) & activePiece.Contains(newSquare) == false & nextSquare > 0))
                 {
                     return false;
                 }
@@ -279,9 +337,9 @@ namespace Tetris
             int x = 0;
             foreach (PictureBox square in activePiece)
             {
-                square.BackColor = Color.White;
-                int squareRow = grid.GetRow(square);
-                int squareCol = grid.GetColumn(square);
+                square.BackColor = TetrisColors.backgroundColor;
+                int squareRow = gridPanel.GetRow(square);
+                int squareCol = gridPanel.GetColumn(square);
                 int newSquareRow = 0;
                 int newSquareCol = 0;
                 if (direction == "left")
@@ -300,7 +358,7 @@ namespace Tetris
                     newSquareRow = squareRow + 1;
                 }
 
-                activePiece2[x] = grid.GetControlFromPosition(newSquareCol, newSquareRow);
+                activePiece2[x] = gridPanel.GetControlFromPosition(newSquareCol, newSquareRow);
                 x++;
             }
 
@@ -330,7 +388,7 @@ namespace Tetris
         {
             foreach (PictureBox square in activePiece2)
             {
-                if ((square.BackColor != Color.White & square.BackColor != Color.LightGray) & activePiece.Contains(square) == false)
+                if ((square.BackColor != TetrisColors.backgroundColor & square.BackColor != (pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor) & activePiece.Contains(square) == false))
                 {
                     return false;
                 }
@@ -344,9 +402,7 @@ namespace Tetris
         {
             if (CheckGameOver() == true)
             {
-                SpeedTimer.Stop();
-                GameTimer.Stop();
-                MessageBox.Show("Game over!");
+                TerminateGame();
             }
 
             else
@@ -360,9 +416,7 @@ namespace Tetris
                 {
                     if (CheckGameOver() == true)
                     {
-                        SpeedTimer.Stop();
-                        GameTimer.Stop();
-                        MessageBox.Show("Game over!");
+                        TerminateGame();
                     }
                     if (CheckForCompleteRows() > -1)
                     {
@@ -377,19 +431,21 @@ namespace Tetris
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             timeElapsed++;
-            TimeLabel.Text = "Time: " + timeElapsed.ToString();
+            TimeLabel.Text = timeElapsed.ToString();
         }
 
         // Clear lowest full row
         private void ClearFullRow()
         {
+            SoundEffects.PlaySound(Properties.Resources.line);
+
             int completedRow = CheckForCompleteRows();
 
             //Turn that row white
             for (int x = 0; x <= 9; x++)
             {
-                Control z = grid.GetControlFromPosition(x, completedRow);
-                z.BackColor = Color.White;
+                Control z = gridPanel.GetControlFromPosition(x, completedRow);
+                z.BackColor = TetrisColors.backgroundColor;
             }
 
             //Move all other squares down
@@ -399,20 +455,20 @@ namespace Tetris
                 for (int y = 0; y <= 9; y++)
                 {
                     //the square
-                    Control z = grid.GetControlFromPosition(y, x);
+                    Control z = gridPanel.GetControlFromPosition(y, x);
 
                     //the square below it
-                    Control zz = grid.GetControlFromPosition(y, x + 1);
+                    Control zz = gridPanel.GetControlFromPosition(y, x + 1);
 
                     zz.BackColor = z.BackColor;
-                    z.BackColor = Color.White;
+                    z.BackColor = TetrisColors.backgroundColor;
                 }
             }
 
             UpdateScore();
 
             clears++;
-            ClearsLabel.Text = "Clears: " + clears;
+            ClearsLabel.Text = clears.ToString();
 
             if (clears % 10 == 0)
             {
@@ -502,8 +558,8 @@ namespace Tetris
                 combo++;
             }
 
-            ScoreLabel.Text = "Score: " + score.ToString();
-            ScoreUpdateTimer.Start();
+            ScoreLabel.Text = score.ToString();
+            //ScoreUpdateTimer.Start();
         }
 
         // Return row number of lowest full row
@@ -516,8 +572,8 @@ namespace Tetris
                 // For each square in row
                 for (int y = 0; y <= 9; y++)
                 {
-                    Control z = grid.GetControlFromPosition(y, x);
-                    if (z.BackColor == Color.White)
+                    Control z = gridPanel.GetControlFromPosition(y, x);
+                    if (z.BackColor == TetrisColors.backgroundColor)
                     {
                         break;
                     }
@@ -532,10 +588,15 @@ namespace Tetris
         }
 
         // Increase fall speed
-        private void LevelUp()
+        private void LevelUp(bool isLoopingBeforeStart = false)
         {
+            if (!isLoopingBeforeStart)
+            {
+                SoundEffects.PlaySound(Properties.Resources.clear);
+            }
+
             level++;
-            LevelLabel.Text = "Level: " + level.ToString();
+            LevelLabel.Text = level.ToString();
 
             // Milliseconds per square fall
             // Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
@@ -550,7 +611,10 @@ namespace Tetris
             {
                 SpeedTimer.Interval = levelSpeed[level];
             }
+
+            ChangeTetrisBackground(level);
         }
+
 
         // Game ends if a piece is in the top row when the next piece is dropped
         private bool CheckGameOver()
@@ -559,7 +623,7 @@ namespace Tetris
 
             foreach (Control box in topRow)
             {
-                if ((box.BackColor != Color.White & box.BackColor != Color.LightGray) & !activePiece.Contains(box))
+                if ((box.BackColor != TetrisColors.backgroundColor & box.BackColor != (pieceGhostPositionToolStripMenuItem.Checked ? TetrisColors.ghostColor : TetrisColors.invisibleGhostColor) & !activePiece.Contains(box)))
                 {
                     //Game over!
                     return true;
@@ -579,6 +643,185 @@ namespace Tetris
         {
                 ScoreUpdateLabel.Text = "";
                 ScoreUpdateTimer.Stop();
+        }
+
+        // Change background based on level
+        private void ChangeTetrisBackground(int level)
+        {
+            switch (level % 10)
+            {
+                case 0:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level0;
+                    break;
+                case 1:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level1;
+                    break;
+                case 2:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level2;
+                    break;
+                case 3:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level3;
+                    break;
+                case 4:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level4;
+                    break;
+                case 5:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level5;
+                    break;
+                case 6:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level6;
+                    break;
+                case 7:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level7;
+                    break;
+                case 8:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level8;
+                    break;
+                case 9:
+                    tetrisBackground.BackgroundImage = Properties.Resources.level9;
+                    break;
+            }
+        }
+
+    private void tetrisContainerPanel_Paint(object sender, PaintEventArgs e)
+        {
+            TetrisColors.DrawCustomBorder(e, tetrisContainerPanel, true, 4);
+        }
+
+        private void nextTetrisBlockPanel_Paint(object sender, PaintEventArgs e)
+        {
+            TetrisColors.DrawCustomBorder(e, nextTetrisBlockPanel);
+        }
+
+        private void statusPanel_Paint(object sender, PaintEventArgs e)
+        {
+            TetrisColors.DrawCustomBorder(e, statusPanel);
+        }
+
+        private void statusContainerPanel_Paint(object sender, PaintEventArgs e)
+        {
+            TetrisColors.DrawCustomBorder(e, statusContainerPanel, true, 4);
+        }
+
+        private void MainWindow_Resize(object sender, EventArgs e)
+        {
+            this.Refresh();
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutTetrisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Pause game
+            if (!pauseGameToolStripMenuItem.Checked)
+            {
+                PauseGame(true);
+            }
+
+            if (new AboutWindow().ShowDialog() == DialogResult.OK)
+            {
+            }
+        }
+
+        private void pauseGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PauseGame(!pauseGameToolStripMenuItem.Checked);
+        }
+
+        public void PauseGame(bool pauseGame)
+        {
+            if (gameRunning)
+            {
+                if (pauseGame)
+                {
+                    SoundEffects.PlayMusic(SoundEffects.MusicState.Pause);
+                    GameTimer.Stop();
+                    SpeedTimer.Stop();
+                    pauseGameToolStripMenuItem.Checked = true;
+                }
+                else
+                {
+                    SoundEffects.PlayMusic(SoundEffects.MusicState.Play);
+                    GameTimer.Start();
+                    SpeedTimer.Start();
+                    pauseGameToolStripMenuItem.Checked = false;
+                }
+            }
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartNewGame(Convert.ToInt32(startingLevelTextBox.Text));
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(!e.ClickedItem.Text.Contains("Pause"))
+                PauseGame(true);
+        }
+
+        public void TerminateGame(bool forceHideDialog = false, bool dialogResetGame = false)
+        {
+            SpeedTimer.Stop();
+            GameTimer.Stop();
+            gameOver = true;
+
+            if (dialogResetGame && gameRunning)
+            {
+                MessageBox.Show("Game restarted to apply new settings.");
+            }
+
+            gameRunning = false;
+
+            if (!forceHideDialog)
+            {
+                SoundEffects.PlaySound(Properties.Resources.gameover);
+                SoundEffects.PlayMusic(SoundEffects.MusicState.Stop);
+                MessageBox.Show("Game over!");
+            }
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            PauseGame(true);
+
+            DialogResult dg;
+            using (DialogCenteringService centeringService = new DialogCenteringService(this)) // center message box
+            {
+                dg = MessageBox.Show(this, "End TETRIS?", "TETRIS for Windows", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            }
+
+            e.Cancel = (dg == DialogResult.No);
+        }
+        private void startingLevelTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string keyPressed = e.KeyChar.ToString();
+
+            // Check for a naughty character in the KeyDown event.
+            if (Regex.IsMatch(keyPressed, @"[^0-9^\b]"))
+            {
+                // Stop the character from being entered into the control since it is illegal.
+                e.Handled = true;
+            }
+        }
+
+        private void playmusicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PlayMusic = playmusicToolStripMenuItem.Checked;
+        }
+
+        private void soundEffectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PlaySounds = soundEffectsToolStripMenuItem.Checked;
+        }
+
+        private void pieceGhostPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TerminateGame(forceHideDialog: true, dialogResetGame: true);
         }
     }   
 }
