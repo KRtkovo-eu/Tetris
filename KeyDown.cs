@@ -10,7 +10,7 @@ namespace Tetris
         // Cleanup needed
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if(gameRunning)
+            if (gameRunning)
             {
                 PauseGame(false);
 
@@ -477,10 +477,16 @@ namespace Tetris
                     {
                         ClearFullRow(true);
                     }
+
                     DropNewPiece();
                 }
             }
 
+            // Cheat menu
+            if (e.Control && e.Alt && e.KeyCode == Keys.W)
+            {
+                cheatsToolStripMenuItem.Visible = !cheatsToolStripMenuItem.Visible;
+            }
         }
     }
 }

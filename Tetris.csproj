@@ -184,6 +184,10 @@
     <None Include="Resources\levelD.bmp" />
     <None Include="Resources\levelE.bmp" />
     <None Include="Resources\levelF.bmp" />
+    <None Include="Resources\tetrisClear.wav" />
+    <None Include="Resources\levelXVI.gif" />
+    <None Include="Resources\jingleLevelXVI.wav" />
+    <None Include="Resources\levelXVI.png" />
     <Content Include="tetris.ico" />
   </ItemGroup>
   <ItemGroup>

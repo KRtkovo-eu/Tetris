@@ -305,6 +305,8 @@
             this.trackHighscoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTetrisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cheatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tetrisBackground = new System.Windows.Forms.Panel();
             this.gridPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.box1)).BeginInit();
@@ -3602,7 +3604,8 @@
             this.gameToolStripMenuItem,
             this.skillToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.cheatsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(934, 24);
@@ -3626,7 +3629,7 @@
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.newGameToolStripMenuItem.Text = "&New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
@@ -3634,27 +3637,27 @@
             // 
             this.pauseGameToolStripMenuItem.Name = "pauseGameToolStripMenuItem";
             this.pauseGameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.pauseGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pauseGameToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pauseGameToolStripMenuItem.Text = "&Pause Game";
             this.pauseGameToolStripMenuItem.Click += new System.EventHandler(this.pauseGameToolStripMenuItem_Click);
             // 
             // highScoresToolStripMenuItem
             // 
             this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
-            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.highScoresToolStripMenuItem.Text = "&High Scores...";
             this.highScoresToolStripMenuItem.Click += new System.EventHandler(this.highScoresToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -3671,7 +3674,7 @@
             // 
             this.startingLevelToolStripMenuItem.Enabled = false;
             this.startingLevelToolStripMenuItem.Name = "startingLevelToolStripMenuItem";
-            this.startingLevelToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.startingLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startingLevelToolStripMenuItem.Text = "Starting Level:";
             // 
             // startingLevelTextBox
@@ -3680,6 +3683,7 @@
             this.startingLevelTextBox.Name = "startingLevelTextBox";
             this.startingLevelTextBox.Size = new System.Drawing.Size(100, 23);
             this.startingLevelTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.startingLevelTextBox_KeyPress);
+            this.startingLevelTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.startingLevelTextBox_KeyUp);
             this.startingLevelTextBox.TextChanged += new System.EventHandler(this.startingLevelTextBox_TextChanged);
             // 
             // optionsToolStripMenuItem
@@ -3755,6 +3759,26 @@
             this.aboutTetrisToolStripMenuItem.Text = "&About Tetris...";
             this.aboutTetrisToolStripMenuItem.Click += new System.EventHandler(this.aboutTetrisToolStripMenuItem_Click);
             // 
+            // cheatsToolStripMenuItem
+            // 
+            this.cheatsToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cheatsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelUpToolStripMenuItem});
+            this.cheatsToolStripMenuItem.Name = "cheatsToolStripMenuItem";
+            this.cheatsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.cheatsToolStripMenuItem.Text = "&Cheats";
+            this.cheatsToolStripMenuItem.Visible = false;
+            // 
+            // levelUpToolStripMenuItem
+            // 
+            this.levelUpToolStripMenuItem.Name = "levelUpToolStripMenuItem";
+            this.levelUpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Tab)));
+            this.levelUpToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.levelUpToolStripMenuItem.Text = "&Level Up";
+            this.levelUpToolStripMenuItem.Click += new System.EventHandler(this.levelUpToolStripMenuItem_Click);
+            // 
             // tetrisBackground
             // 
             this.tetrisBackground.Controls.Add(this.statusContainerPanel);
@@ -3777,6 +3801,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TETRIS for Windows";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
@@ -4313,6 +4338,8 @@
         private System.Windows.Forms.Label gainedPoints;
         private System.Windows.Forms.Panel previewPanelContainer;
         private System.Windows.Forms.Label nextLbl;
+        private System.Windows.Forms.ToolStripMenuItem cheatsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem levelUpToolStripMenuItem;
     }
 }
 

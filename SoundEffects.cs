@@ -14,11 +14,8 @@ namespace Tetris
         {
             if (Properties.Settings.Default.PlaySounds)
             {
-
-
                 Task.Run(() => {
-                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-                    snd.Play();
+                    new System.Media.SoundPlayer(str).Play();
                 });
             }
         }

@@ -90,6 +90,15 @@ namespace Tetris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream jingleLevelXVI {
+            get {
+                return ResourceManager.GetStream("jingleLevelXVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream korebeiniki {
             get {
                 return ResourceManager.GetStream("korebeiniki", resourceCulture);
@@ -257,6 +266,16 @@ namespace Tetris.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelXVI {
+            get {
+                object obj = ResourceManager.GetObject("levelXVI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream line {
@@ -281,6 +300,15 @@ namespace Tetris.Properties {
         internal static System.IO.UnmanagedMemoryStream selection {
             get {
                 return ResourceManager.GetStream("selection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream tetrisClear {
+            get {
+                return ResourceManager.GetStream("tetrisClear", resourceCulture);
             }
         }
         
