@@ -15,7 +15,7 @@ namespace Tetris
 
         private void noSelectButton1_Click(object sender, EventArgs e)
         {
-            string highScoreString = $"{totalScoreLabel.Text};";
+            string highScoreString = $"{Environment.NewLine}{totalScoreLabel.Text};";
             highScoreString += $"{levelLabel.Text};";
             highScoreString += $"{ShortenText(coolName.Text, 32)};";
             highScoreString += $"{ShortenText(coolQuote.Text, 128)}";

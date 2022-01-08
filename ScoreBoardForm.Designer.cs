@@ -33,9 +33,9 @@ namespace Tetris
             this.noSelectButton1 = new Tetris.NoSelectButton();
             this.highScoreList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +69,7 @@ namespace Tetris
             this.highScoreList.Location = new System.Drawing.Point(2, 41);
             this.highScoreList.Name = "highScoreList";
             this.highScoreList.Size = new System.Drawing.Size(355, 267);
+            this.highScoreList.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.highScoreList.TabIndex = 1001;
             this.highScoreList.UseCompatibleStateImageBehavior = false;
             this.highScoreList.View = System.Windows.Forms.View.Details;
@@ -76,6 +77,10 @@ namespace Tetris
             // columnHeader1
             // 
             this.columnHeader1.Text = "Score";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "End Level";
             // 
             // columnHeader2
             // 
@@ -86,10 +91,6 @@ namespace Tetris
             // 
             this.columnHeader3.Text = "Cool Quote";
             this.columnHeader3.Width = 300;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "End Level";
             // 
             // ScoreBoardForm
             // 
