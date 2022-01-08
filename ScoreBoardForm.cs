@@ -11,24 +11,31 @@ namespace Tetris
         {
             InitializeComponent();
 
-            var scoreFile = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\tetris.hsb");
-            var scoreLines = scoreFile.Split(new char[] { '\n' });
-            var scoreSorted = scoreLines.OrderByDescending(x => Convert.ToInt32(x.Split(new char[] { ';' })[0]));
-            
-            foreach(var score in scoreSorted)
+            try
             {
-                var scoreTextEntry = score.Split(new char[] { ';' });
+                var scoreFile = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\tetris.hsb");
+                var scoreLines = scoreFile.Split(new char[] { '\n' });
+                var scoreSorted = scoreLines.OrderByDescending(x => Convert.ToInt32(x.Split(new char[] { ';' })[0]));
 
-                ListViewItem scoreEntry = new ListViewItem();
-                scoreEntry.Text = scoreTextEntry[0];
-                ListViewItem.ListViewSubItem scoreEntryName = new ListViewItem.ListViewSubItem();
-                scoreEntryName.Text = scoreTextEntry[1];
-                scoreEntry.SubItems.Add(scoreEntryName);
-                ListViewItem.ListViewSubItem scoreEntryQuote = new ListViewItem.ListViewSubItem();
-                scoreEntryQuote.Text = scoreTextEntry[2];
-                scoreEntry.SubItems.Add(scoreEntryQuote);
+                foreach (var score in scoreSorted)
+                {
+                    var scoreTextEntry = score.Split(new char[] { ';' });
 
-                highScoreList.Items.Add(scoreEntry);
+                    ListViewItem scoreEntry = new ListViewItem();
+                    scoreEntry.Text = scoreTextEntry[0];
+                    ListViewItem.ListViewSubItem scoreEntryName = new ListViewItem.ListViewSubItem();
+                    scoreEntryName.Text = scoreTextEntry[1];
+                    scoreEntry.SubItems.Add(scoreEntryName);
+                    ListViewItem.ListViewSubItem scoreEntryQuote = new ListViewItem.ListViewSubItem();
+                    scoreEntryQuote.Text = scoreTextEntry[2];
+                    scoreEntry.SubItems.Add(scoreEntryQuote);
+
+                    highScoreList.Items.Add(scoreEntry);
+                }
+            }
+            catch
+            {
+
             }
         }
 
