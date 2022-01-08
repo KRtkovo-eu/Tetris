@@ -28,6 +28,7 @@ namespace Tetris
         bool gameOver = false;
         bool gameRunning = false;
         int PieceSequenceIteration = 0;
+        bool cheatUsed = false;
 
         readonly Color[] colorList = 
         {  
@@ -94,6 +95,9 @@ namespace Tetris
             {
                 LevelUp(isLoopingBeforeStart: true); ;
             }
+
+            // Set cheat check to cheat menu visibility
+            cheatUsed = cheatsToolStripMenuItem.Visible;
 
             combo = 0;
             score = 0;
@@ -578,10 +582,11 @@ namespace Tetris
                 // Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
                 int[] levelSpeed =
                 {
-                // LEVEL
-              // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-                800, 716, 633, 555, 466, 383, 300, 216, 133, 115, 100, 090, 085, 080, 075, 070
-            };
+                  // LEVEL
+                  // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+                    800, 716, 633, 555, 466, 383, 300, 216, 133, 115, 100, 090, 085, 080, 075, 070
+                };
+                SpeedTimer.Interval = levelSpeed[level];
 
                 ChangeTetrisBackground(level);
             }
@@ -597,7 +602,8 @@ namespace Tetris
         // Game ends if a piece is in the top row when the next piece is dropped
         private bool CheckGameOver()
         {
-            Control[] topRow = { box1, box2, box3, box4, box5, box6, box7, box8, box9, box10 };
+            Control[] topRow = { box1, box2, box3, box4, box5, box6, box7, box8, box9, box10,
+             box11, box12, box13, box14, box15, box16, box17, box18, box19, box20 };
 
             foreach (Control box in topRow)
             {
@@ -805,7 +811,16 @@ namespace Tetris
 
                 if(trackHighscoreToolStripMenuItem.Checked && score > 0)
                 {
-                    new GameOverScore(score, (level + 1).ToString()).ShowDialog();
+                    if(cheatUsed)
+                    {
+                        // If user played with cheats, allow him to write his score with "Cheated" flag
+                        new GameOverScore(score, "CHEATER").ShowDialog();
+                    }
+                    else
+                    {
+                        new GameOverScore(score, (level + 1).ToString()).ShowDialog();
+                    }
+                    
                 }
                 else
                 {
@@ -886,7 +901,10 @@ namespace Tetris
                     userSelectedLevel = 15;
                 }
 
-                ChangeTetrisBackground(userSelectedLevel);
+                if (!gameRunning)
+                {
+                    ChangeTetrisBackground(userSelectedLevel);
+                }
             }
         }
 
@@ -900,21 +918,39 @@ namespace Tetris
             new ScoreBoardForm().ShowDialog();
         }
 
+        private void startingLevelTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Properties.Settings.Default.StartingLevel = startingLevelTextBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
         // Cheat Level UP (e.g. for debugging)
         // CTRL+SHIFT+TAB
         private void levelUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Cheat enabled only if cheat menu is visible
-            if(cheatsToolStripMenuItem.Visible)
+            if(cheatsToolStripMenuItem.Visible && gameRunning)
             {
+                cheatUsed = true;
                 LevelUp();
             }
         }
 
-        private void startingLevelTextBox_KeyUp(object sender, KeyEventArgs e)
+        // Cheat 1000 to Score
+        // CTRL+SHIFT+Q
+        private void score1000ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.StartingLevel = startingLevelTextBox.Text;
-            Properties.Settings.Default.Save();
+            // Cheat enabled only if cheat menu is visible
+            if (cheatsToolStripMenuItem.Visible && gameRunning)
+            {
+                cheatUsed = true;
+                score += 1000;
+            }
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/KRtkovo-eu/Tetris/wiki");
         }
     }   
 }

@@ -486,6 +486,11 @@ namespace Tetris
             if (e.Control && e.Alt && e.KeyCode == Keys.W)
             {
                 cheatsToolStripMenuItem.Visible = !cheatsToolStripMenuItem.Visible;
+
+                if (cheatsToolStripMenuItem.Visible)
+                {
+                    cheatUsed = true;
+                }
             }
         }
     }
