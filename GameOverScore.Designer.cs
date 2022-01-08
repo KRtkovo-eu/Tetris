@@ -78,7 +78,7 @@ namespace Tetris
             this.coolName.Location = new System.Drawing.Point(27, 95);
             this.coolName.Name = "coolName";
             this.coolName.Size = new System.Drawing.Size(242, 20);
-            this.coolName.TabIndex = 0;
+            this.coolName.TabIndex = 1;
             // 
             // label3
             // 
@@ -95,7 +95,7 @@ namespace Tetris
             this.coolQuote.Location = new System.Drawing.Point(27, 147);
             this.coolQuote.Name = "coolQuote";
             this.coolQuote.Size = new System.Drawing.Size(242, 20);
-            this.coolQuote.TabIndex = 1;
+            this.coolQuote.TabIndex = 2;
             // 
             // pictureBox1
             // 
@@ -129,16 +129,18 @@ namespace Tetris
             // 
             // noSelectButton1
             // 
+            this.noSelectButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.noSelectButton1.Location = new System.Drawing.Point(275, 95);
             this.noSelectButton1.Name = "noSelectButton1";
             this.noSelectButton1.Size = new System.Drawing.Size(72, 72);
-            this.noSelectButton1.TabIndex = 1000;
+            this.noSelectButton1.TabIndex = 0;
             this.noSelectButton1.Text = "&OK";
             this.noSelectButton1.UseVisualStyleBackColor = true;
             this.noSelectButton1.Click += new System.EventHandler(this.noSelectButton1_Click);
             // 
             // GameOverScore
             // 
+            this.AcceptButton = this.noSelectButton1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 184);

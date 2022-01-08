@@ -467,6 +467,7 @@ namespace Tetris
                     TotalScoreLabel.Text = score.ToString();
                     gainedScoreDebugVar = droppedPieceScoreBonus;
                     gainedPoints.Text = $"+{gainedScoreDebugVar}";
+                    gainedPoints.ForeColor = Color.Green;
 
                     for (int x = 0; x < 4; x++)
                     {

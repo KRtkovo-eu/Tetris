@@ -15,6 +15,37 @@ namespace Tetris
 
         private void noSelectButton1_Click(object sender, EventArgs e)
         {
+            SaveAndClose();
+        }
+
+        private static string ShortenText(string text, int textLength)
+        {
+            text = text.Replace(";", "");
+
+            if(text.Length > textLength)
+            {
+                return text.Substring(0, textLength);
+            }
+            return text;
+        }
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            else if (Form.ModifierKeys == Keys.None && keyData == Keys.Enter)
+            {
+                SaveAndClose();
+                return true;
+            }
+            return base.ProcessDialogKey(keyData);
+        }
+
+        private void SaveAndClose()
+        {
             try
             {
                 string highScoreString = $"{totalScoreLabel.Text};";
@@ -38,17 +69,6 @@ namespace Tetris
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        private static string ShortenText(string text, int textLength)
-        {
-            text = text.Replace(";", "");
-
-            if(text.Length > textLength)
-            {
-                return text.Substring(0, textLength);
-            }
-            return text;
         }
     }
 }

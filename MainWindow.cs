@@ -113,6 +113,7 @@ namespace Tetris
             LevelLabel.Text = (level + 1).ToString();
             gainedScoreDebugVar = score;
             gainedPoints.Text = $"{gainedScoreDebugVar}";
+            gainedPoints.ForeColor = Color.Green;
             ClearsLabel.Text = clears.ToString();
             TimeLabel.Text = $"{timeElapsed} sec.";
 
@@ -517,6 +518,7 @@ namespace Tetris
                 }
 
                 gainedPoints.Text = $"+{gainedScoreDebugVar}";
+                gainedPoints.ForeColor = Color.Green;
 
                 TotalScoreLabel.Text = score.ToString();
 
@@ -814,7 +816,7 @@ namespace Tetris
                     if(cheatUsed)
                     {
                         // If user played with cheats, allow him to write his score with "Cheated" flag
-                        new GameOverScore(score, "CHEATER").ShowDialog();
+                        new GameOverScore(score, $"{(level + 1)}       CHEATER").ShowDialog();
                     }
                     else
                     {
@@ -945,6 +947,9 @@ namespace Tetris
             {
                 cheatUsed = true;
                 score += 1000;
+                TotalScoreLabel.Text = $"{score}";
+                gainedPoints.Text = "+1000";
+                gainedPoints.ForeColor = Color.Magenta;
             }
         }
 
