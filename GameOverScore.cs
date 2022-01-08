@@ -15,11 +15,26 @@ namespace Tetris
 
         private void noSelectButton1_Click(object sender, EventArgs e)
         {
-            string highScoreString = $"{Environment.NewLine}{totalScoreLabel.Text};";
-            highScoreString += $"{levelLabel.Text};";
-            highScoreString += $"{ShortenText(coolName.Text, 32)};";
-            highScoreString += $"{ShortenText(coolQuote.Text, 128)}";
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "\\tetris.hsb", highScoreString);
+            try
+            {
+                string highScoreString = $"{totalScoreLabel.Text};";
+                highScoreString += $"{levelLabel.Text};";
+                highScoreString += $"{ShortenText(coolName.Text, 32)};";
+                highScoreString += $"{ShortenText(coolQuote.Text, 128)}";
+                highScoreString += "\n";
+
+                var highScoreFile = AppDomain.CurrentDomain.BaseDirectory + "\\tetris.hsb";
+
+                if (!System.IO.File.Exists(highScoreFile))
+                {
+                    System.IO.File.Create(highScoreFile);
+                }
+                System.IO.File.AppendAllText(highScoreFile, highScoreString);
+            }
+            catch
+            {
+
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();

@@ -37,10 +37,18 @@ namespace Tetris
 
                     byte[] b = myMemStream.ToArray();
 
-                    FileInfo fileInfo = new FileInfo("korebeiniki.wav");
-                    FileStream fs = fileInfo.OpenWrite();
-                    fs.Write(b, 0, b.Length);
-                    fs.Close();
+                    var korebeinikiFilePath = AppDomain.CurrentDomain.BaseDirectory + "\\korebeiniki.wav";
+                    FileInfo fileInfo = new FileInfo(korebeinikiFilePath);
+
+                    if (!System.IO.File.Exists(korebeinikiFilePath))
+                    {
+                        FileStream fs = fileInfo.OpenWrite();
+                        fs.Write(b, 0, b.Length);
+                        fs.Close();
+
+                        System.Threading.Thread.Sleep(100);
+                    }
+                    
                     player.URL = fileInfo.Name;
                 }
 
