@@ -865,5 +865,10 @@ namespace Tetris
         {
             TetrisColors.DrawCustomBorder(e, previewPanelContainer);
         }
+
+        private void highScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ScoreBoardForm().ShowDialog();
+        }
     }   
 }
