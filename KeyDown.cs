@@ -457,9 +457,12 @@ namespace Tetris
                 // Hard drop
                 SoundEffects.PlaySound(Properties.Resources.fall);
 
-                // Calculate score addition
-                score += (Ghost[0].Location.Y - activePiece[0].Location.Y) / 20;
-                ScoreLabel.Text = score.ToString();
+                // Calculate score addition based on dropped height
+                var droppedPieceScoreBonus = (Ghost[0].Location.Y - activePiece[0].Location.Y) / 20;
+                score += droppedPieceScoreBonus;
+                TotalScoreLabel.Text = score.ToString();
+                gainedScoreDebugVar = droppedPieceScoreBonus;
+                gainedPoints.Text = $"+{gainedScoreDebugVar}";
 
                 for (int x = 0; x < 4; x++)
                 {
@@ -468,7 +471,7 @@ namespace Tetris
                 }
                 if (CheckForCompleteRows() > -1)
                 {
-                    ClearFullRow();
+                    ClearFullRow(true);
                 }
                 DropNewPiece();
             }

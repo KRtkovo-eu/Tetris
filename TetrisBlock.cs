@@ -24,7 +24,10 @@ namespace Tetris
 
         private void TetrisBlock_Paint(object sender, PaintEventArgs e)
         {
-            if(this.BackColor != TetrisColors.backgroundColor && this.BackColor != TetrisColors.ghostColor && this.BackColor != TetrisColors.invisibleGhostColor)
+            if(this.BackColor != TetrisColors.backgroundColor &&
+                this.BackColor != TetrisColors.ghostColor &&
+                this.BackColor != TetrisColors.invisibleGhostColor &&
+                this.BackColor != TetrisColors.previewBackColor)
             {
                 TetrisColors.DrawCustomBorder(e, this, this.BackColor);
             }

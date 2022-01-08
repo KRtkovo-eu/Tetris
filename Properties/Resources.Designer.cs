@@ -197,6 +197,66 @@ namespace Tetris.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelA {
+            get {
+                object obj = ResourceManager.GetObject("levelA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelB {
+            get {
+                object obj = ResourceManager.GetObject("levelB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelC {
+            get {
+                object obj = ResourceManager.GetObject("levelC", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelD {
+            get {
+                object obj = ResourceManager.GetObject("levelD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelE {
+            get {
+                object obj = ResourceManager.GetObject("levelE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap levelF {
+            get {
+                object obj = ResourceManager.GetObject("levelF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream line {
@@ -221,6 +281,16 @@ namespace Tetris.Properties {
         internal static System.IO.UnmanagedMemoryStream selection {
             get {
                 return ResourceManager.GetStream("selection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tetrisRibbon {
+            get {
+                object obj = ResourceManager.GetObject("tetrisRibbon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

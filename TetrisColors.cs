@@ -8,6 +8,7 @@ namespace Tetris
         public static Color backgroundColor = Color.Black;
         public static Color ghostColor = Color.FromArgb(255, 34, 34, 34);
         public static Color invisibleGhostColor = Color.FromArgb(0, 34, 34, 34);
+        public static Color previewBackColor = Color.Silver;
         public static Color pieceI = Color.FromArgb(255, 191, 0, 0); //RED
         public static Color pieceL = Color.FromArgb(255, 191, 191, 0); //YELLOW
         public static Color pieceJ = Color.FromArgb(255, 191, 0, 191); //PURPLE

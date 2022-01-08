@@ -253,7 +253,7 @@
             this.box252 = new Tetris.TetrisBlock();
             this.SpeedTimer = new System.Windows.Forms.Timer(this.components);
             this.TimeLabel = new System.Windows.Forms.Label();
-            this.ScoreLabel = new System.Windows.Forms.Label();
+            this.TotalScoreLabel = new System.Windows.Forms.Label();
             this.ClearsLabel = new System.Windows.Forms.Label();
             this.LevelLabel = new System.Windows.Forms.Label();
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
@@ -274,14 +274,15 @@
             this.box214 = new Tetris.TetrisBlock();
             this.box215 = new Tetris.TetrisBlock();
             this.box216 = new Tetris.TetrisBlock();
-            this.ScoreUpdateLabel = new System.Windows.Forms.Label();
-            this.ScoreUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.statusPanel = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.previewPanelContainer = new System.Windows.Forms.Panel();
+            this.nextLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.gainedPoints = new System.Windows.Forms.Label();
             this.tetrisGridPanel = new System.Windows.Forms.Panel();
             this.tetrisContainerPanel = new System.Windows.Forms.Panel();
             this.statusContainerPanel = new System.Windows.Forms.Panel();
@@ -300,6 +301,7 @@
             this.playmusicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pieceGhostPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.trackHighscoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTetrisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -543,6 +545,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.box215)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.box216)).BeginInit();
             this.statusPanel.SuspendLayout();
+            this.previewPanelContainer.SuspendLayout();
             this.tetrisGridPanel.SuspendLayout();
             this.tetrisContainerPanel.SuspendLayout();
             this.statusContainerPanel.SuspendLayout();
@@ -3187,32 +3190,32 @@
             // 
             this.TimeLabel.AutoSize = true;
             this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TimeLabel.ForeColor = System.Drawing.Color.Blue;
-            this.TimeLabel.Location = new System.Drawing.Point(21, 166);
+            this.TimeLabel.ForeColor = System.Drawing.Color.Red;
+            this.TimeLabel.Location = new System.Drawing.Point(21, 154);
             this.TimeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(16, 16);
+            this.TimeLabel.Size = new System.Drawing.Size(49, 16);
             this.TimeLabel.TabIndex = 3;
-            this.TimeLabel.Text = "0";
+            this.TimeLabel.Text = "0 sec.";
             // 
-            // ScoreLabel
+            // TotalScoreLabel
             // 
-            this.ScoreLabel.AutoSize = true;
-            this.ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreLabel.ForeColor = System.Drawing.Color.Blue;
-            this.ScoreLabel.Location = new System.Drawing.Point(21, 26);
-            this.ScoreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ScoreLabel.Name = "ScoreLabel";
-            this.ScoreLabel.Size = new System.Drawing.Size(16, 16);
-            this.ScoreLabel.TabIndex = 4;
-            this.ScoreLabel.Text = "0";
+            this.TotalScoreLabel.AutoSize = true;
+            this.TotalScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotalScoreLabel.ForeColor = System.Drawing.Color.Blue;
+            this.TotalScoreLabel.Location = new System.Drawing.Point(21, 26);
+            this.TotalScoreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TotalScoreLabel.Name = "TotalScoreLabel";
+            this.TotalScoreLabel.Size = new System.Drawing.Size(16, 16);
+            this.TotalScoreLabel.TabIndex = 4;
+            this.TotalScoreLabel.Text = "0";
             // 
             // ClearsLabel
             // 
             this.ClearsLabel.AutoSize = true;
             this.ClearsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ClearsLabel.ForeColor = System.Drawing.Color.Blue;
-            this.ClearsLabel.Location = new System.Drawing.Point(21, 134);
+            this.ClearsLabel.Location = new System.Drawing.Point(21, 122);
             this.ClearsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ClearsLabel.Name = "ClearsLabel";
             this.ClearsLabel.Size = new System.Drawing.Size(16, 16);
@@ -3224,7 +3227,7 @@
             this.LevelLabel.AutoSize = true;
             this.LevelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LevelLabel.ForeColor = System.Drawing.Color.Blue;
-            this.LevelLabel.Location = new System.Drawing.Point(21, 58);
+            this.LevelLabel.Location = new System.Drawing.Point(21, 90);
             this.LevelLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LevelLabel.Name = "LevelLabel";
             this.LevelLabel.Size = new System.Drawing.Size(16, 16);
@@ -3238,8 +3241,7 @@
             // 
             // nextTetrisBlockPanel
             // 
-            this.nextTetrisBlockPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nextTetrisBlockPanel.BackColor = System.Drawing.Color.Black;
+            this.nextTetrisBlockPanel.BackColor = System.Drawing.Color.Silver;
             this.nextTetrisBlockPanel.ColumnCount = 4;
             this.nextTetrisBlockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.nextTetrisBlockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -3261,7 +3263,7 @@
             this.nextTetrisBlockPanel.Controls.Add(this.box214, 1, 3);
             this.nextTetrisBlockPanel.Controls.Add(this.box215, 2, 3);
             this.nextTetrisBlockPanel.Controls.Add(this.box216, 3, 3);
-            this.nextTetrisBlockPanel.Location = new System.Drawing.Point(13, 197);
+            this.nextTetrisBlockPanel.Location = new System.Drawing.Point(8, 23);
             this.nextTetrisBlockPanel.Margin = new System.Windows.Forms.Padding(2);
             this.nextTetrisBlockPanel.Name = "nextTetrisBlockPanel";
             this.nextTetrisBlockPanel.RowCount = 4;
@@ -3269,239 +3271,237 @@
             this.nextTetrisBlockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.nextTetrisBlockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.nextTetrisBlockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.nextTetrisBlockPanel.Size = new System.Drawing.Size(88, 88);
+            this.nextTetrisBlockPanel.Size = new System.Drawing.Size(74, 74);
             this.nextTetrisBlockPanel.TabIndex = 7;
-            this.nextTetrisBlockPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.nextTetrisBlockPanel_Paint);
             // 
             // box201
             // 
-            this.box201.BackColor = System.Drawing.Color.Black;
+            this.box201.BackColor = System.Drawing.Color.Silver;
             this.box201.Dock = System.Windows.Forms.DockStyle.Fill;
             this.box201.Location = new System.Drawing.Point(0, 0);
             this.box201.Margin = new System.Windows.Forms.Padding(0);
             this.box201.Name = "box201";
-            this.box201.Size = new System.Drawing.Size(22, 22);
+            this.box201.Size = new System.Drawing.Size(18, 18);
             this.box201.TabIndex = 0;
             this.box201.TabStop = false;
             // 
             // box202
             // 
-            this.box202.BackColor = System.Drawing.Color.Black;
+            this.box202.BackColor = System.Drawing.Color.Silver;
             this.box202.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box202.Location = new System.Drawing.Point(22, 0);
+            this.box202.Location = new System.Drawing.Point(18, 0);
             this.box202.Margin = new System.Windows.Forms.Padding(0);
             this.box202.Name = "box202";
-            this.box202.Size = new System.Drawing.Size(22, 22);
+            this.box202.Size = new System.Drawing.Size(18, 18);
             this.box202.TabIndex = 1;
             this.box202.TabStop = false;
             // 
             // box203
             // 
-            this.box203.BackColor = System.Drawing.Color.Black;
+            this.box203.BackColor = System.Drawing.Color.Silver;
             this.box203.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box203.Location = new System.Drawing.Point(44, 0);
+            this.box203.Location = new System.Drawing.Point(36, 0);
             this.box203.Margin = new System.Windows.Forms.Padding(0);
             this.box203.Name = "box203";
-            this.box203.Size = new System.Drawing.Size(22, 22);
+            this.box203.Size = new System.Drawing.Size(18, 18);
             this.box203.TabIndex = 2;
             this.box203.TabStop = false;
             // 
             // box204
             // 
-            this.box204.BackColor = System.Drawing.Color.Black;
+            this.box204.BackColor = System.Drawing.Color.Silver;
             this.box204.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box204.Location = new System.Drawing.Point(66, 0);
+            this.box204.Location = new System.Drawing.Point(54, 0);
             this.box204.Margin = new System.Windows.Forms.Padding(0);
             this.box204.Name = "box204";
-            this.box204.Size = new System.Drawing.Size(22, 22);
+            this.box204.Size = new System.Drawing.Size(20, 18);
             this.box204.TabIndex = 3;
             this.box204.TabStop = false;
             // 
             // box205
             // 
-            this.box205.BackColor = System.Drawing.Color.Black;
+            this.box205.BackColor = System.Drawing.Color.Silver;
             this.box205.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box205.Location = new System.Drawing.Point(0, 22);
+            this.box205.Location = new System.Drawing.Point(0, 18);
             this.box205.Margin = new System.Windows.Forms.Padding(0);
             this.box205.Name = "box205";
-            this.box205.Size = new System.Drawing.Size(22, 22);
+            this.box205.Size = new System.Drawing.Size(18, 18);
             this.box205.TabIndex = 4;
             this.box205.TabStop = false;
             // 
             // box206
             // 
-            this.box206.BackColor = System.Drawing.Color.Black;
+            this.box206.BackColor = System.Drawing.Color.Silver;
             this.box206.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box206.Location = new System.Drawing.Point(22, 22);
+            this.box206.Location = new System.Drawing.Point(18, 18);
             this.box206.Margin = new System.Windows.Forms.Padding(0);
             this.box206.Name = "box206";
-            this.box206.Size = new System.Drawing.Size(22, 22);
+            this.box206.Size = new System.Drawing.Size(18, 18);
             this.box206.TabIndex = 5;
             this.box206.TabStop = false;
             // 
             // box207
             // 
-            this.box207.BackColor = System.Drawing.Color.Black;
+            this.box207.BackColor = System.Drawing.Color.Silver;
             this.box207.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box207.Location = new System.Drawing.Point(44, 22);
+            this.box207.Location = new System.Drawing.Point(36, 18);
             this.box207.Margin = new System.Windows.Forms.Padding(0);
             this.box207.Name = "box207";
-            this.box207.Size = new System.Drawing.Size(22, 22);
+            this.box207.Size = new System.Drawing.Size(18, 18);
             this.box207.TabIndex = 6;
             this.box207.TabStop = false;
             // 
             // box208
             // 
-            this.box208.BackColor = System.Drawing.Color.Black;
+            this.box208.BackColor = System.Drawing.Color.Silver;
             this.box208.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box208.Location = new System.Drawing.Point(66, 22);
+            this.box208.Location = new System.Drawing.Point(54, 18);
             this.box208.Margin = new System.Windows.Forms.Padding(0);
             this.box208.Name = "box208";
-            this.box208.Size = new System.Drawing.Size(22, 22);
+            this.box208.Size = new System.Drawing.Size(20, 18);
             this.box208.TabIndex = 7;
             this.box208.TabStop = false;
             // 
             // box209
             // 
-            this.box209.BackColor = System.Drawing.Color.Black;
+            this.box209.BackColor = System.Drawing.Color.Silver;
             this.box209.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box209.Location = new System.Drawing.Point(0, 44);
+            this.box209.Location = new System.Drawing.Point(0, 36);
             this.box209.Margin = new System.Windows.Forms.Padding(0);
             this.box209.Name = "box209";
-            this.box209.Size = new System.Drawing.Size(22, 22);
+            this.box209.Size = new System.Drawing.Size(18, 18);
             this.box209.TabIndex = 8;
             this.box209.TabStop = false;
             // 
             // box210
             // 
-            this.box210.BackColor = System.Drawing.Color.Black;
+            this.box210.BackColor = System.Drawing.Color.Silver;
             this.box210.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box210.Location = new System.Drawing.Point(22, 44);
+            this.box210.Location = new System.Drawing.Point(18, 36);
             this.box210.Margin = new System.Windows.Forms.Padding(0);
             this.box210.Name = "box210";
-            this.box210.Size = new System.Drawing.Size(22, 22);
+            this.box210.Size = new System.Drawing.Size(18, 18);
             this.box210.TabIndex = 9;
             this.box210.TabStop = false;
             // 
             // box211
             // 
-            this.box211.BackColor = System.Drawing.Color.Black;
+            this.box211.BackColor = System.Drawing.Color.Silver;
             this.box211.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box211.Location = new System.Drawing.Point(44, 44);
+            this.box211.Location = new System.Drawing.Point(36, 36);
             this.box211.Margin = new System.Windows.Forms.Padding(0);
             this.box211.Name = "box211";
-            this.box211.Size = new System.Drawing.Size(22, 22);
+            this.box211.Size = new System.Drawing.Size(18, 18);
             this.box211.TabIndex = 10;
             this.box211.TabStop = false;
             // 
             // box212
             // 
-            this.box212.BackColor = System.Drawing.Color.Black;
+            this.box212.BackColor = System.Drawing.Color.Silver;
             this.box212.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box212.Location = new System.Drawing.Point(66, 44);
+            this.box212.Location = new System.Drawing.Point(54, 36);
             this.box212.Margin = new System.Windows.Forms.Padding(0);
             this.box212.Name = "box212";
-            this.box212.Size = new System.Drawing.Size(22, 22);
+            this.box212.Size = new System.Drawing.Size(20, 18);
             this.box212.TabIndex = 11;
             this.box212.TabStop = false;
             // 
             // box213
             // 
-            this.box213.BackColor = System.Drawing.Color.Black;
+            this.box213.BackColor = System.Drawing.Color.Silver;
             this.box213.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box213.Location = new System.Drawing.Point(0, 66);
+            this.box213.Location = new System.Drawing.Point(0, 54);
             this.box213.Margin = new System.Windows.Forms.Padding(0);
             this.box213.Name = "box213";
-            this.box213.Size = new System.Drawing.Size(22, 22);
+            this.box213.Size = new System.Drawing.Size(18, 20);
             this.box213.TabIndex = 12;
             this.box213.TabStop = false;
             // 
             // box214
             // 
-            this.box214.BackColor = System.Drawing.Color.Black;
+            this.box214.BackColor = System.Drawing.Color.Silver;
             this.box214.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box214.Location = new System.Drawing.Point(22, 66);
+            this.box214.Location = new System.Drawing.Point(18, 54);
             this.box214.Margin = new System.Windows.Forms.Padding(0);
             this.box214.Name = "box214";
-            this.box214.Size = new System.Drawing.Size(22, 22);
+            this.box214.Size = new System.Drawing.Size(18, 20);
             this.box214.TabIndex = 13;
             this.box214.TabStop = false;
             // 
             // box215
             // 
-            this.box215.BackColor = System.Drawing.Color.Black;
+            this.box215.BackColor = System.Drawing.Color.Silver;
             this.box215.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box215.Location = new System.Drawing.Point(44, 66);
+            this.box215.Location = new System.Drawing.Point(36, 54);
             this.box215.Margin = new System.Windows.Forms.Padding(0);
             this.box215.Name = "box215";
-            this.box215.Size = new System.Drawing.Size(22, 22);
+            this.box215.Size = new System.Drawing.Size(18, 20);
             this.box215.TabIndex = 14;
             this.box215.TabStop = false;
             // 
             // box216
             // 
-            this.box216.BackColor = System.Drawing.Color.Black;
+            this.box216.BackColor = System.Drawing.Color.Silver;
             this.box216.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.box216.Location = new System.Drawing.Point(66, 66);
+            this.box216.Location = new System.Drawing.Point(54, 54);
             this.box216.Margin = new System.Windows.Forms.Padding(0);
             this.box216.Name = "box216";
-            this.box216.Size = new System.Drawing.Size(22, 22);
+            this.box216.Size = new System.Drawing.Size(20, 20);
             this.box216.TabIndex = 15;
             this.box216.TabStop = false;
             // 
-            // ScoreUpdateLabel
-            // 
-            this.ScoreUpdateLabel.AutoSize = true;
-            this.ScoreUpdateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ScoreUpdateLabel.ForeColor = System.Drawing.Color.Green;
-            this.ScoreUpdateLabel.Location = new System.Drawing.Point(21, 90);
-            this.ScoreUpdateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ScoreUpdateLabel.Name = "ScoreUpdateLabel";
-            this.ScoreUpdateLabel.Size = new System.Drawing.Size(16, 16);
-            this.ScoreUpdateLabel.TabIndex = 11;
-            this.ScoreUpdateLabel.Text = "0";
-            // 
-            // ScoreUpdateTimer
-            // 
-            this.ScoreUpdateTimer.Interval = 2000;
-            this.ScoreUpdateTimer.Tick += new System.EventHandler(this.ScoreUpdateTimer_Tick);
-            // 
             // statusPanel
             // 
-            this.statusPanel.Controls.Add(this.label5);
+            this.statusPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusPanel.Controls.Add(this.previewPanelContainer);
             this.statusPanel.Controls.Add(this.label4);
-            this.statusPanel.Controls.Add(this.ScoreUpdateLabel);
             this.statusPanel.Controls.Add(this.label3);
             this.statusPanel.Controls.Add(this.label2);
+            this.statusPanel.Controls.Add(this.LevelLabel);
+            this.statusPanel.Controls.Add(this.label6);
             this.statusPanel.Controls.Add(this.label1);
             this.statusPanel.Controls.Add(this.TimeLabel);
-            this.statusPanel.Controls.Add(this.ScoreLabel);
-            this.statusPanel.Controls.Add(this.nextTetrisBlockPanel);
+            this.statusPanel.Controls.Add(this.gainedPoints);
+            this.statusPanel.Controls.Add(this.TotalScoreLabel);
             this.statusPanel.Controls.Add(this.ClearsLabel);
-            this.statusPanel.Controls.Add(this.LevelLabel);
             this.statusPanel.Cursor = System.Windows.Forms.Cursors.Cross;
             this.statusPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.statusPanel.Location = new System.Drawing.Point(13, 13);
             this.statusPanel.Name = "statusPanel";
-            this.statusPanel.Size = new System.Drawing.Size(114, 296);
+            this.statusPanel.Size = new System.Drawing.Size(114, 284);
             this.statusPanel.TabIndex = 12;
             this.statusPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statusPanel_Paint);
             // 
-            // label5
+            // previewPanelContainer
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(12, 74);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 16);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Combo:";
+            this.previewPanelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewPanelContainer.Controls.Add(this.nextTetrisBlockPanel);
+            this.previewPanelContainer.Controls.Add(this.nextLbl);
+            this.previewPanelContainer.Location = new System.Drawing.Point(12, 178);
+            this.previewPanelContainer.Name = "previewPanelContainer";
+            this.previewPanelContainer.Size = new System.Drawing.Size(90, 100);
+            this.previewPanelContainer.TabIndex = 11;
+            this.previewPanelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.previewPanelContainer_Paint);
+            // 
+            // nextLbl
+            // 
+            this.nextLbl.AutoSize = true;
+            this.nextLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.nextLbl.Location = new System.Drawing.Point(28, 5);
+            this.nextLbl.Name = "nextLbl";
+            this.nextLbl.Size = new System.Drawing.Size(33, 13);
+            this.nextLbl.TabIndex = 0;
+            this.nextLbl.Text = "Next";
+            this.nextLbl.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(12, 150);
+            this.label4.Location = new System.Drawing.Point(12, 138);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 16);
             this.label4.TabIndex = 10;
@@ -3511,7 +3511,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(12, 118);
+            this.label3.Location = new System.Drawing.Point(12, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 16);
             this.label3.TabIndex = 9;
@@ -3521,11 +3521,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(12, 42);
+            this.label2.Location = new System.Drawing.Point(12, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Level:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(12, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(95, 16);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Gained Points:";
             // 
             // label1
             // 
@@ -3537,6 +3547,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Total Score:";
             // 
+            // gainedPoints
+            // 
+            this.gainedPoints.AutoSize = true;
+            this.gainedPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gainedPoints.ForeColor = System.Drawing.Color.Green;
+            this.gainedPoints.Location = new System.Drawing.Point(21, 58);
+            this.gainedPoints.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.gainedPoints.Name = "gainedPoints";
+            this.gainedPoints.Size = new System.Drawing.Size(16, 16);
+            this.gainedPoints.TabIndex = 4;
+            this.gainedPoints.Text = "0";
+            // 
             // tetrisGridPanel
             // 
             this.tetrisGridPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3544,6 +3566,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tetrisGridPanel.BackColor = System.Drawing.Color.Black;
             this.tetrisGridPanel.Controls.Add(this.gridPanel);
+            this.tetrisGridPanel.Cursor = System.Windows.Forms.Cursors.Cross;
             this.tetrisGridPanel.Location = new System.Drawing.Point(15, 15);
             this.tetrisGridPanel.Name = "tetrisGridPanel";
             this.tetrisGridPanel.Size = new System.Drawing.Size(330, 600);
@@ -3569,7 +3592,7 @@
             this.statusContainerPanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.statusContainerPanel.Location = new System.Drawing.Point(15, 15);
             this.statusContainerPanel.Name = "statusContainerPanel";
-            this.statusContainerPanel.Size = new System.Drawing.Size(140, 320);
+            this.statusContainerPanel.Size = new System.Drawing.Size(140, 308);
             this.statusContainerPanel.TabIndex = 15;
             this.statusContainerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statusContainerPanel_Paint);
             // 
@@ -3630,6 +3653,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -3656,6 +3680,7 @@
             this.startingLevelTextBox.Name = "startingLevelTextBox";
             this.startingLevelTextBox.Size = new System.Drawing.Size(100, 23);
             this.startingLevelTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.startingLevelTextBox_KeyPress);
+            this.startingLevelTextBox.TextChanged += new System.EventHandler(this.startingLevelTextBox_TextChanged);
             // 
             // optionsToolStripMenuItem
             // 
@@ -3664,6 +3689,7 @@
             this.playmusicToolStripMenuItem,
             this.toolStripSeparator2,
             this.pieceGhostPositionToolStripMenuItem,
+            this.toolStripSeparator3,
             this.trackHighscoreToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -3682,7 +3708,7 @@
             this.playmusicToolStripMenuItem.CheckOnClick = true;
             this.playmusicToolStripMenuItem.Name = "playmusicToolStripMenuItem";
             this.playmusicToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.playmusicToolStripMenuItem.Text = "Play &music";
+            this.playmusicToolStripMenuItem.Text = "Play &Music";
             this.playmusicToolStripMenuItem.Click += new System.EventHandler(this.playmusicToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -3700,12 +3726,18 @@
             this.pieceGhostPositionToolStripMenuItem.Text = "&Piece Ghost Position";
             this.pieceGhostPositionToolStripMenuItem.Click += new System.EventHandler(this.pieceGhostPositionToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(179, 6);
+            // 
             // trackHighscoreToolStripMenuItem
             // 
-            this.trackHighscoreToolStripMenuItem.Enabled = false;
+            this.trackHighscoreToolStripMenuItem.CheckOnClick = true;
             this.trackHighscoreToolStripMenuItem.Name = "trackHighscoreToolStripMenuItem";
             this.trackHighscoreToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.trackHighscoreToolStripMenuItem.Text = "&Track High Scores";
+            this.trackHighscoreToolStripMenuItem.Click += new System.EventHandler(this.trackHighscoreToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -3990,6 +4022,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.box216)).EndInit();
             this.statusPanel.ResumeLayout(false);
             this.statusPanel.PerformLayout();
+            this.previewPanelContainer.ResumeLayout(false);
+            this.previewPanelContainer.PerformLayout();
             this.tetrisGridPanel.ResumeLayout(false);
             this.tetrisContainerPanel.ResumeLayout(false);
             this.statusContainerPanel.ResumeLayout(false);
@@ -4106,7 +4140,7 @@
         private TetrisBlock box100;
         private System.Windows.Forms.Timer SpeedTimer;
         private System.Windows.Forms.Label TimeLabel;
-        private System.Windows.Forms.Label ScoreLabel;
+        private System.Windows.Forms.Label TotalScoreLabel;
         private TetrisBlock box101;
         private TetrisBlock box102;
         private TetrisBlock box103;
@@ -4247,8 +4281,6 @@
         private TetrisBlock box250;
         private TetrisBlock box251;
         private TetrisBlock box252;
-        private System.Windows.Forms.Label ScoreUpdateLabel;
-        private System.Windows.Forms.Timer ScoreUpdateTimer;
         private System.Windows.Forms.Panel statusPanel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -4256,7 +4288,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel tetrisGridPanel;
         private System.Windows.Forms.Panel tetrisContainerPanel;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel statusContainerPanel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Panel tetrisBackground;
@@ -4277,6 +4308,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem trackHighscoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pieceGhostPositionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label gainedPoints;
+        private System.Windows.Forms.Panel previewPanelContainer;
+        private System.Windows.Forms.Label nextLbl;
     }
 }
 

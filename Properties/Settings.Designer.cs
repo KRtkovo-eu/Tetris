@@ -46,5 +46,41 @@ namespace Tetris.Properties {
                 this["PlaySounds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowGhost {
+            get {
+                return ((bool)(this["ShowGhost"]));
+            }
+            set {
+                this["ShowGhost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TrackHighScores {
+            get {
+                return ((bool)(this["TrackHighScores"]));
+            }
+            set {
+                this["TrackHighScores"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string StartingLevel {
+            get {
+                return ((string)(this["StartingLevel"]));
+            }
+            set {
+                this["StartingLevel"] = value;
+            }
+        }
     }
 }

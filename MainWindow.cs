@@ -20,10 +20,9 @@ namespace Tetris
         int currentPiece;
         int nextPieceInt;
         int rotations = 0;
-        Color pieceColor = TetrisColors.backgroundColor;
-        Color savedPieceColor = TetrisColors.backgroundColor;
         int combo = 0;
         int score = 0;
+        int gainedScoreDebugVar = 0;
         int clears = 0;
         int level = 0;
         bool gameOver = false;
@@ -49,30 +48,39 @@ namespace Tetris
             ResizeRedraw = true;
             DoubleBuffered = true;
 
-            ChangeTetrisBackground(level);
+            startingLevelTextBox.Text = "1";
+
+            soundEffectsToolStripMenuItem.Checked = Properties.Settings.Default.PlaySounds;
+            playmusicToolStripMenuItem.Checked = Properties.Settings.Default.PlayMusic;
+            pieceGhostPositionToolStripMenuItem.Checked = Properties.Settings.Default.ShowGhost;
+            trackHighscoreToolStripMenuItem.Checked = Properties.Settings.Default.TrackHighScores;
+            startingLevelTextBox.Text = Properties.Settings.Default.StartingLevel;
+
+            if(startingLevelTextBox.Text != "")
+            {
+                ChangeTetrisBackground(Convert.ToInt32(startingLevelTextBox.Text) - 1);
+            }
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {
             if (new AboutWindow().ShowDialog() == DialogResult.OK)
             {
-                //StartNewGame(level);
-                startingLevelTextBox.Text = "0";
+
             }
         }
 
         public void StartNewGame(int startingLevel)
         {
+            // Ensure that no game is running
             TerminateGame(forceHideDialog: true);
 
-            // Reset game area
-            foreach(TetrisBlock tetrisBlock in gridPanel.Controls)
-            {
-                tetrisBlock.BackColor = TetrisColors.backgroundColor;
-            }
+            // Save current startingLevel to application settings
+            Properties.Settings.Default.StartingLevel = startingLevelTextBox.Text;
+            Properties.Settings.Default.Save();
 
-            // Reset block preview area
-            foreach (TetrisBlock tetrisBlock in nextTetrisBlockPanel.Controls)
+            // Reset game area
+            foreach (TetrisBlock tetrisBlock in gridPanel.Controls)
             {
                 tetrisBlock.BackColor = TetrisColors.backgroundColor;
             }
@@ -95,16 +103,17 @@ namespace Tetris
             currentPiece = 0;
             nextPieceInt = 0;
             rotations = 0;
+            PieceSequenceIteration = 0;
 
-            ScoreLabel.Text = score.ToString();
-            LevelLabel.Text = level.ToString();
-            ScoreUpdateLabel.Text = score.ToString();
+            TotalScoreLabel.Text = score.ToString();
+            LevelLabel.Text = (level + 1).ToString();
+            gainedScoreDebugVar = score;
+            gainedPoints.Text = $"{gainedScoreDebugVar}";
             ClearsLabel.Text = clears.ToString();
-            TimeLabel.Text = timeElapsed.ToString();
+            TimeLabel.Text = $"{timeElapsed} sec.";
 
             ChangeTetrisBackground(level);
 
-            //ScoreUpdateLabel.Text = "";
             SpeedTimer.Start();
             GameTimer.Start();
 
@@ -170,7 +179,7 @@ namespace Tetris
             {
                 foreach (Control x in nextPiece)
                 {
-                    x.BackColor = TetrisColors.backgroundColor;
+                    x.BackColor = TetrisColors.previewBackColor;
                 }
             }
 
@@ -197,6 +206,7 @@ namespace Tetris
             {
                 square.BackColor = colorList[nextPieceInt];
             }
+            nextLbl.Visible = true;
 
             // Layout options for falling piece
             Control[,] activePieceArray =
@@ -431,11 +441,11 @@ namespace Tetris
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             timeElapsed++;
-            TimeLabel.Text = timeElapsed.ToString();
+            TimeLabel.Text = $"{timeElapsed} sec.";
         }
 
         // Clear lowest full row
-        private void ClearFullRow()
+        private void ClearFullRow(bool clearedFromDrop = false)
         {
             SoundEffects.PlaySound(Properties.Resources.line);
 
@@ -465,7 +475,7 @@ namespace Tetris
                 }
             }
 
-            UpdateScore();
+            UpdateScore(clearedFromDrop);
 
             clears++;
             ClearsLabel.Text = clears.ToString();
@@ -477,89 +487,37 @@ namespace Tetris
 
             if (CheckForCompleteRows() > -1)
             {
-                ClearFullRow();
+                ClearFullRow(clearedFromDrop);
             }
         }
 
-        private void UpdateScore()
+        private void UpdateScore(bool clearedFromDrop = false)
         {
-            // 1-3 line clear is worth 100 per line
-            // Quad line clear (no combo) is worth 800
-            // 2 or more quad line clears in a row is worth 1200 
-
-            bool skipComboReset = false;
-
-            // Single clear
-            if (combo == 0)
+            if (CheckForCompleteRows() == -1)
             {
-                score += 100;
-                ScoreUpdateLabel.Text = "+100";
-            }
+                int[] tetrisScore = { 40, 100, 300, 1200 };
+                int tetrisScoringSystem = (level * tetrisScore[combo]) + tetrisScore[combo];
+                score += tetrisScoringSystem;
 
-            // Double clear
-            else if (combo == 1)
-            {
-                score += 100;
-                ScoreUpdateLabel.Text = "+200";
-            }
+                if(clearedFromDrop)
+                {
+                    gainedScoreDebugVar += tetrisScoringSystem;
+                }
+                else
+                {
+                    gainedScoreDebugVar = tetrisScoringSystem;
+                }
 
-            // Triple clear
-            else if (combo == 2)
-            {
-                score += 100;
-                ScoreUpdateLabel.Text = "+300";
-            }
+                gainedPoints.Text = $"+{gainedScoreDebugVar}";
 
-            // Quad clear, start combo
-            else if (combo == 3)
-            {
-                score += 500;
-                ScoreUpdateLabel.Text = "+800";
-                skipComboReset = true;
-            }
+                TotalScoreLabel.Text = score.ToString();
 
-            // Single clear, broken combo
-            else if (combo > 3 && combo % 4 == 0)
-            {
-                score += 100;
-                ScoreUpdateLabel.Text = "+100";
-            }
-
-            // Double clear, broken combo
-            else if (combo > 3 && ((combo - 1) % 4 == 0))
-            {
-                score += 100;
-                ScoreUpdateLabel.Text = "+200";
-            }
-
-            // Triple clear, broken combo
-            else if (combo > 3 && ((combo - 2) % 4 == 0))
-            {
-                score += 100;
-                ScoreUpdateLabel.Text = "+300";
-            }
-
-            // Quad clear, continue combo
-            else if (combo > 3 && ((combo - 3) % 4 == 0))
-            {
-                score += 900;
-                ScoreUpdateLabel.Text = "+1200";
-                skipComboReset = true;
-            }
-
-            if (CheckForCompleteRows() == -1 && skipComboReset == false)
-            {
-                // 1-3 line clear
                 combo = 0;
             }
             else
             {
-                // Quad clear
                 combo++;
             }
-
-            ScoreLabel.Text = score.ToString();
-            //ScoreUpdateTimer.Start();
         }
 
         // Return row number of lowest full row
@@ -596,7 +554,7 @@ namespace Tetris
             }
 
             level++;
-            LevelLabel.Text = level.ToString();
+            LevelLabel.Text = (level + 1).ToString();
 
             // Milliseconds per square fall
             // Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
@@ -638,17 +596,10 @@ namespace Tetris
             return false;
         }
 
-        // Clear score update notification every 2 seconds
-        private void ScoreUpdateTimer_Tick(object sender, EventArgs e)
-        {
-                ScoreUpdateLabel.Text = "";
-                ScoreUpdateTimer.Stop();
-        }
-
         // Change background based on level
         private void ChangeTetrisBackground(int level)
         {
-            switch (level % 10)
+            switch (level % 16)
             {
                 case 0:
                     tetrisBackground.BackgroundImage = Properties.Resources.level0;
@@ -680,17 +631,30 @@ namespace Tetris
                 case 9:
                     tetrisBackground.BackgroundImage = Properties.Resources.level9;
                     break;
+                case 10:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelA;
+                    break;
+                case 11:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelB;
+                    break;
+                case 12:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelC;
+                    break;
+                case 13:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelD;
+                    break;
+                case 14:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelE;
+                    break;
+                case 15:
+                    tetrisBackground.BackgroundImage = Properties.Resources.levelF;
+                    break;
             }
         }
 
-    private void tetrisContainerPanel_Paint(object sender, PaintEventArgs e)
+        private void tetrisContainerPanel_Paint(object sender, PaintEventArgs e)
         {
             TetrisColors.DrawCustomBorder(e, tetrisContainerPanel, true, 4);
-        }
-
-        private void nextTetrisBlockPanel_Paint(object sender, PaintEventArgs e)
-        {
-            TetrisColors.DrawCustomBorder(e, nextTetrisBlockPanel);
         }
 
         private void statusPanel_Paint(object sender, PaintEventArgs e)
@@ -755,7 +719,21 @@ namespace Tetris
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewGame(Convert.ToInt32(startingLevelTextBox.Text));
+            // User set starting level 1, internally its level 0, etc.
+            int userSelectedLevel = Convert.ToInt32(startingLevelTextBox.Text) - 1;
+
+            if (userSelectedLevel < 0)
+            {
+                startingLevelTextBox.Text = "1";
+                userSelectedLevel = 0;
+            }
+            else if (userSelectedLevel >= 15)
+            {
+                startingLevelTextBox.Text = "16";
+                userSelectedLevel = 15;
+            }
+
+            StartNewGame(userSelectedLevel);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -770,9 +748,21 @@ namespace Tetris
             GameTimer.Stop();
             gameOver = true;
 
+            // Reset block preview area
+            nextLbl.Visible = false;
+            foreach (TetrisBlock tetrisBlock in nextTetrisBlockPanel.Controls)
+            {
+                tetrisBlock.BackColor = TetrisColors.previewBackColor;
+            }
+
+
             if (dialogResetGame && gameRunning)
             {
-                MessageBox.Show("Game restarted to apply new settings.");
+                DialogResult dg;
+                using (DialogCenteringService centeringService = new DialogCenteringService(this)) // center message box
+                {
+                    dg = MessageBox.Show("Game restarted to apply new settings.");
+                }
             }
 
             gameRunning = false;
@@ -781,7 +771,19 @@ namespace Tetris
             {
                 SoundEffects.PlaySound(Properties.Resources.gameover);
                 SoundEffects.PlayMusic(SoundEffects.MusicState.Stop);
-                MessageBox.Show("Game over!");
+
+                if(trackHighscoreToolStripMenuItem.Checked && score > 0)
+                {
+                    new GameOverScore(score, (level + 1).ToString()).ShowDialog();
+                }
+                else
+                {
+                    DialogResult dg;
+                    using (DialogCenteringService centeringService = new DialogCenteringService(this)) // center message box
+                    {
+                        dg = MessageBox.Show("Game over!");
+                    }
+                }
             }
         }
 
@@ -802,7 +804,7 @@ namespace Tetris
             string keyPressed = e.KeyChar.ToString();
 
             // Check for a naughty character in the KeyDown event.
-            if (Regex.IsMatch(keyPressed, @"[^0-9^\b]"))
+            if (Regex.IsMatch(keyPressed, @"[^0-9^\b^\n]"))
             {
                 // Stop the character from being entered into the control since it is illegal.
                 e.Handled = true;
@@ -812,16 +814,56 @@ namespace Tetris
         private void playmusicToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.PlayMusic = playmusicToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void soundEffectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.PlaySounds = soundEffectsToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void pieceGhostPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.ShowGhost = pieceGhostPositionToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
             TerminateGame(forceHideDialog: true, dialogResetGame: true);
+        }
+
+        private void trackHighscoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.TrackHighScores = trackHighscoreToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void startingLevelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (startingLevelTextBox.Text != "")
+            {
+                // User set starting level 1, internally its level 0, etc.
+                int userSelectedLevel = Convert.ToInt32(startingLevelTextBox.Text) - 1;
+
+                if (userSelectedLevel < 0)
+                {
+                    startingLevelTextBox.Text = "1";
+                    userSelectedLevel = 0;
+                }
+                else if (userSelectedLevel >= 15)
+                {
+                    startingLevelTextBox.Text = "16";
+                    userSelectedLevel = 15;
+                }
+
+                Properties.Settings.Default.StartingLevel = startingLevelTextBox.Text;
+                Properties.Settings.Default.Save();
+
+                ChangeTetrisBackground(userSelectedLevel);
+            }
+        }
+
+        private void previewPanelContainer_Paint(object sender, PaintEventArgs e)
+        {
+            TetrisColors.DrawCustomBorder(e, previewPanelContainer);
         }
     }   
 }

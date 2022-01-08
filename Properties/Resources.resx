@@ -118,8 +118,50 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mswentpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mswentpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="levelD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelD.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="level2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\level2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\line.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="levelF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelF.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="selection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\selection.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="levelE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelE.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="level8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level8.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="korebeiniki" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\korebeiniki.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="level7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level7.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="levelC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelC.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="levelB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelB.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="levelA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\levelA.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="level0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level0.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="level6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\level6.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -127,46 +169,25 @@
   <data name="level4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\level4.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="level9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\level9.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="level0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\level0.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="level8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\level8.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gameover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gameover.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="level5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\level5.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="level7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\level7.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="level1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\level1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fall.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="level3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\level3.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mswentpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mswentpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="level1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clear.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="level9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level9.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\fall.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="gameover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gameover.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="korebeiniki" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\korebeiniki.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\line.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="selection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\selection.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tetrisRibbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\tetrisRibbon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
