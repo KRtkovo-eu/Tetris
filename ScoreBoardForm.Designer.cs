@@ -35,6 +35,7 @@ namespace Tetris
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@ namespace Tetris
             // 
             this.highScoreList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader4,
             this.columnHeader2,
             this.columnHeader3});
             this.highScoreList.HideSelection = false;
@@ -83,7 +85,11 @@ namespace Tetris
             // columnHeader3
             // 
             this.columnHeader3.Text = "Cool Quote";
-            this.columnHeader3.Width = 190;
+            this.columnHeader3.Width = 300;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "End Level";
             // 
             // ScoreBoardForm
             // 
@@ -111,5 +117,6 @@ namespace Tetris
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

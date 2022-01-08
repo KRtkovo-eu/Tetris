@@ -23,11 +23,17 @@ namespace Tetris
 
                     ListViewItem scoreEntry = new ListViewItem();
                     scoreEntry.Text = scoreTextEntry[0];
+
+                    ListViewItem.ListViewSubItem scoreEntryLevel = new ListViewItem.ListViewSubItem();
+                    scoreEntryLevel.Text = scoreTextEntry[1];
+                    scoreEntry.SubItems.Add(scoreEntryLevel);
+
                     ListViewItem.ListViewSubItem scoreEntryName = new ListViewItem.ListViewSubItem();
-                    scoreEntryName.Text = scoreTextEntry[1];
+                    scoreEntryName.Text = scoreTextEntry[2];
                     scoreEntry.SubItems.Add(scoreEntryName);
+
                     ListViewItem.ListViewSubItem scoreEntryQuote = new ListViewItem.ListViewSubItem();
-                    scoreEntryQuote.Text = scoreTextEntry[2];
+                    scoreEntryQuote.Text = scoreTextEntry[3];
                     scoreEntry.SubItems.Add(scoreEntryQuote);
 
                     highScoreList.Items.Add(scoreEntry);
