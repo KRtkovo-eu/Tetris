@@ -752,7 +752,11 @@ namespace Tetris
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // User set starting level 1, internally its level 0, etc.
-            int userSelectedLevel = Convert.ToInt32(startingLevelTextBox.Text) - 1;
+            int userSelectedLevel = -1;
+            if(startingLevelTextBox.Text != "")
+            {
+                userSelectedLevel = Convert.ToInt32(startingLevelTextBox.Text) - 1;
+            }
 
             if (userSelectedLevel < 0)
             {
