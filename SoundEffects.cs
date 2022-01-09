@@ -53,10 +53,16 @@ namespace Tetris
                         break;
                     case MusicState.Play:
                         player.settings.setMode("Loop", true);
-                        player.controls.play();
+                        if (player.playState == WMPLib.WMPPlayState.wmppsStopped || player.playState == WMPLib.WMPPlayState.wmppsPaused)
+                        {
+                            player.controls.play();
+                        }
                         break;
                     case MusicState.Pause:
-                        player.controls.pause();
+                        if(player.playState == WMPLib.WMPPlayState.wmppsPlaying)
+                        {
+                            player.controls.pause();
+                        }
                         break;
                 }
             }
