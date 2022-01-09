@@ -61,6 +61,8 @@ namespace Tetris
             {
                 ChangeTetrisBackground(Convert.ToInt32(startingLevelTextBox.Text) - 1);
             }
+
+            this.Size = Properties.Settings.Default.WindowSize;
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -701,8 +703,9 @@ namespace Tetris
 
         private void MainWindow_Resize(object sender, EventArgs e)
         {
+            Properties.Settings.Default.WindowSize = this.Size;
+            Properties.Settings.Default.Save();
             this.Refresh();
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -842,6 +845,9 @@ namespace Tetris
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             PauseGame(true);
+
+            Properties.Settings.Default.WindowSize = this.Size;
+            Properties.Settings.Default.Save();
 
             DialogResult dg;
             using (DialogCenteringService centeringService = new DialogCenteringService(this)) // center message box
