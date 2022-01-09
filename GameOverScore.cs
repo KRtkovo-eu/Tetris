@@ -46,8 +46,8 @@ namespace Tetris
 
         private void SaveAndClose()
         {
-            try
-            {
+            //try
+            //{
                 string highScoreString = $"{totalScoreLabel.Text};";
                 highScoreString += $"{levelLabel.Text};";
                 highScoreString += $"{ShortenText(coolName.Text, 32)};";
@@ -58,14 +58,15 @@ namespace Tetris
 
                 if (!System.IO.File.Exists(highScoreFile))
                 {
-                    System.IO.File.Create(highScoreFile);
+                    var xyz = System.IO.File.Create(highScoreFile);
+                    xyz.Close(); 
                 }
                 System.IO.File.AppendAllText(highScoreFile, highScoreString);
-            }
-            catch
-            {
+            //}
+            //catch
+            //{
 
-            }
+            //}
 
             this.DialogResult = DialogResult.OK;
             this.Close();
