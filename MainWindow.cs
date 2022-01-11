@@ -604,7 +604,6 @@ namespace Tetris
                 LevelLabel.Text = (level + 1).ToString();
 
                 // Milliseconds per square fall
-                // Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
                 int[] levelSpeed;
                 switch (currentGameDifficulty)
                 {
@@ -613,9 +612,10 @@ namespace Tetris
                         {
                             // LEVEL
                             // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-                            800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 180, 160, 140
+                            800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 230, 210, 190, 180
                         };
                         break;
+                    // Legend: Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
                     case GameDifficulty.Legend:
                         levelSpeed = new int[]
                         {
@@ -629,7 +629,7 @@ namespace Tetris
                         {
                             // LEVEL
                             // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-                            800, 730, 660, 590, 520, 450, 380, 310, 240, 205, 170, 145, 125, 115, 105, 100
+                            800, 730, 660, 590, 520, 450, 380, 310, 240, 220, 195, 180, 165, 140, 125, 110
                         };
                         break;
                 }

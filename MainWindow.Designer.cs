@@ -3672,8 +3672,7 @@
             // 
             this.skillToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.difficultyToolStripMenuItem,
-            this.startingLevelToolStripMenuItem,
-            this.startingLevelTextBox});
+            this.startingLevelToolStripMenuItem});
             this.skillToolStripMenuItem.Name = "skillToolStripMenuItem";
             this.skillToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.skillToolStripMenuItem.Text = "&Skill";
@@ -3711,7 +3710,8 @@
             // 
             // startingLevelToolStripMenuItem
             // 
-            this.startingLevelToolStripMenuItem.Enabled = false;
+            this.startingLevelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startingLevelTextBox});
             this.startingLevelToolStripMenuItem.Name = "startingLevelToolStripMenuItem";
             this.startingLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startingLevelToolStripMenuItem.Text = "Starting Level:";
@@ -4387,7 +4387,6 @@
         private System.Windows.Forms.ToolStripMenuItem skillToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutTetrisToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox startingLevelTextBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem startingLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
@@ -4410,6 +4409,7 @@
         private System.Windows.Forms.ToolStripMenuItem beginnerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem standardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem legendToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox startingLevelTextBox;
     }
 }
 
