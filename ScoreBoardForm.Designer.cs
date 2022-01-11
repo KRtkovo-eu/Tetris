@@ -36,6 +36,7 @@ namespace Tetris
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.noSelectButton2 = new Tetris.NoSelectButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,9 +51,10 @@ namespace Tetris
             // 
             // noSelectButton1
             // 
-            this.noSelectButton1.Location = new System.Drawing.Point(275, 314);
+            this.noSelectButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.noSelectButton1.Location = new System.Drawing.Point(252, 314);
             this.noSelectButton1.Name = "noSelectButton1";
-            this.noSelectButton1.Size = new System.Drawing.Size(72, 25);
+            this.noSelectButton1.Size = new System.Drawing.Size(105, 34);
             this.noSelectButton1.TabIndex = 1000;
             this.noSelectButton1.Text = "&Close";
             this.noSelectButton1.UseVisualStyleBackColor = true;
@@ -92,11 +94,23 @@ namespace Tetris
             this.columnHeader3.Text = "Cool Quote";
             this.columnHeader3.Width = 300;
             // 
+            // noSelectButton2
+            // 
+            this.noSelectButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.noSelectButton2.Location = new System.Drawing.Point(2, 314);
+            this.noSelectButton2.Name = "noSelectButton2";
+            this.noSelectButton2.Size = new System.Drawing.Size(105, 34);
+            this.noSelectButton2.TabIndex = 1002;
+            this.noSelectButton2.Text = "&Reset Board";
+            this.noSelectButton2.UseVisualStyleBackColor = true;
+            this.noSelectButton2.Click += new System.EventHandler(this.noSelectButton2_Click);
+            // 
             // ScoreBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 351);
+            this.Controls.Add(this.noSelectButton2);
             this.Controls.Add(this.highScoreList);
             this.Controls.Add(this.noSelectButton1);
             this.Controls.Add(this.pictureBox1);
@@ -119,5 +133,6 @@ namespace Tetris
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private NoSelectButton noSelectButton2;
     }
 }
