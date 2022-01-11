@@ -5,12 +5,15 @@ namespace Tetris
 {
     public partial class GameOverScore : Form
     {
-        public GameOverScore(int score, string userLevel)
+        private bool _isCheater;
+
+        public GameOverScore(int score, string userLevel, bool isCheater = false)
         {
             InitializeComponent();
 
             totalScoreLabel.Text = score.ToString();
             levelLabel.Text = userLevel;
+            _isCheater = isCheater;
         }
 
         private void noSelectButton1_Click(object sender, EventArgs e)
@@ -48,8 +51,8 @@ namespace Tetris
         {
             string highScoreString = $"{totalScoreLabel.Text};";
             highScoreString += $"{levelLabel.Text};";
-            highScoreString += $"{ShortenText(coolName.Text, 32)};";
-            highScoreString += $"{ShortenText(coolQuote.Text, 128)}";
+            highScoreString += _isCheater ? $"CHEATER {ShortenText(coolName.Text, 32)};" : $"{ShortenText(coolName.Text, 32)};";
+            highScoreString += _isCheater ? "I was cheating all the time, I'm such a bad player!" : $"{ShortenText(coolQuote.Text, 128)}";
             highScoreString += "\n";
 
             Properties.Settings.Default.HighScoreSave += highScoreString;

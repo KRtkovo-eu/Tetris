@@ -826,11 +826,11 @@ namespace Tetris
                     if(cheatUsed)
                     {
                         // If user played with cheats, allow him to write his score with "Cheated" flag
-                        new GameOverScore(score, $"{(level + 1)}       CHEATER").ShowDialog();
+                        new GameOverScore(score, $"{(level + 1)}").ShowDialog();
                     }
                     else
                     {
-                        new GameOverScore(score, (level + 1).ToString()).ShowDialog();
+                        new GameOverScore(score, $"{(level + 1)}").ShowDialog();
                     }
                     
                 }
