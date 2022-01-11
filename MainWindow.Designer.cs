@@ -295,7 +295,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.begginerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beginnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.standardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startingLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -3681,19 +3681,19 @@
             // difficultyToolStripMenuItem
             // 
             this.difficultyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.begginerToolStripMenuItem,
+            this.beginnerToolStripMenuItem,
             this.standardToolStripMenuItem,
             this.legendToolStripMenuItem});
             this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
             this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.difficultyToolStripMenuItem.Text = "&Difficulty";
             // 
-            // begginerToolStripMenuItem
+            // beginnerToolStripMenuItem
             // 
-            this.begginerToolStripMenuItem.Name = "begginerToolStripMenuItem";
-            this.begginerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.begginerToolStripMenuItem.Text = "&Begginer";
-            this.begginerToolStripMenuItem.Click += new System.EventHandler(this.begginerToolStripMenuItem_Click);
+            this.beginnerToolStripMenuItem.Name = "beginnerToolStripMenuItem";
+            this.beginnerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beginnerToolStripMenuItem.Text = "&Beginner";
+            this.beginnerToolStripMenuItem.Click += new System.EventHandler(this.beginnerToolStripMenuItem_Click);
             // 
             // standardToolStripMenuItem
             // 
@@ -4407,7 +4407,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem difficultyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem begginerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beginnerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem standardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem legendToolStripMenuItem;
     }

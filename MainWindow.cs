@@ -502,7 +502,7 @@ namespace Tetris
             int clearsToPassLevel;
             switch (currentGameDifficulty)
             {
-                case GameDifficulty.Begginer:
+                case GameDifficulty.Beginner:
                     clearsToPassLevel = (level + 1) * 5;
                     break;
                 default:
@@ -608,7 +608,7 @@ namespace Tetris
                 int[] levelSpeed;
                 switch (currentGameDifficulty)
                 {
-                    case GameDifficulty.Begginer:
+                    case GameDifficulty.Beginner:
                         levelSpeed = new int[]
                         {
                             // LEVEL
@@ -1006,14 +1006,14 @@ namespace Tetris
 
         public void SetGameDifficulty(GameDifficulty gameDifficulty)
         {
-            begginerToolStripMenuItem.Checked = false;
+            beginnerToolStripMenuItem.Checked = false;
             standardToolStripMenuItem.Checked = false;
             legendToolStripMenuItem.Checked = false;
 
             switch(gameDifficulty)
             {
-                case GameDifficulty.Begginer:
-                    begginerToolStripMenuItem.Checked = true;
+                case GameDifficulty.Beginner:
+                    beginnerToolStripMenuItem.Checked = true;
                     break;
                 case GameDifficulty.Standard:
                     standardToolStripMenuItem.Checked = true;
@@ -1027,9 +1027,9 @@ namespace Tetris
             Properties.Settings.Default.Save();
         }
 
-        private void begginerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void beginnerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetGameDifficulty(GameDifficulty.Begginer);
+            SetGameDifficulty(GameDifficulty.Beginner);
         }
 
         private void standardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1044,7 +1044,7 @@ namespace Tetris
 
         public enum GameDifficulty
         {
-            Begginer = 0,
+            Beginner = 0,
             Standard = 1,
             Legend = 2
         }
