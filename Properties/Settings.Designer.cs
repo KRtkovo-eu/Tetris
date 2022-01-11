@@ -94,5 +94,17 @@ namespace Tetris.Properties {
                 this["WindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HighScoreSave {
+            get {
+                return ((string)(this["HighScoreSave"]));
+            }
+            set {
+                this["HighScoreSave"] = value;
+            }
+        }
     }
 }

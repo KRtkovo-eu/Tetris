@@ -172,9 +172,6 @@
     <None Include="Resources\level9.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="tetris.hsb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="tetrisRibbon.png" />
     <None Include="Resources\mswentpack.png" />
     <None Include="Resources\fall.wav" />

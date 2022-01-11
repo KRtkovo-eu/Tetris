@@ -491,9 +491,12 @@ namespace Tetris
             clears++;
             ClearsLabel.Text = clears.ToString();
 
-            if (clears % 10 == 0)
+            // You're leveling by clearing lines, not by scoring points.
+            // You level up by clearing[current level] * 10 lines.
+            if ((clears * (level + 1)) % 10 == 0)
             {
                 LevelUp();
+                clears = 0;
             }
 
             if (CheckForCompleteRows() > -1)

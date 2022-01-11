@@ -46,27 +46,14 @@ namespace Tetris
 
         private void SaveAndClose()
         {
-            //try
-            //{
-                string highScoreString = $"{totalScoreLabel.Text};";
-                highScoreString += $"{levelLabel.Text};";
-                highScoreString += $"{ShortenText(coolName.Text, 32)};";
-                highScoreString += $"{ShortenText(coolQuote.Text, 128)}";
-                highScoreString += "\n";
+            string highScoreString = $"{totalScoreLabel.Text};";
+            highScoreString += $"{levelLabel.Text};";
+            highScoreString += $"{ShortenText(coolName.Text, 32)};";
+            highScoreString += $"{ShortenText(coolQuote.Text, 128)}";
+            highScoreString += "\n";
 
-                var highScoreFile = AppDomain.CurrentDomain.BaseDirectory + "\\tetris.hsb";
-
-                if (!System.IO.File.Exists(highScoreFile))
-                {
-                    var xyz = System.IO.File.Create(highScoreFile);
-                    xyz.Close(); 
-                }
-                System.IO.File.AppendAllText(highScoreFile, highScoreString);
-            //}
-            //catch
-            //{
-
-            //}
+            Properties.Settings.Default.HighScoreSave += highScoreString;
+            Properties.Settings.Default.Save();
 
             this.DialogResult = DialogResult.OK;
             this.Close();
