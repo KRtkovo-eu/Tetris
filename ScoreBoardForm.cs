@@ -26,24 +26,25 @@ namespace Tetris
             {
                 if (score.Contains(";") && score != "" && score != "\r" && score != "\n")
                 {
-                    var scoreTextEntry = score.Split(new char[] { ';' });
+                    string[] scoreTextEntry = score.Split(new char[] { ';' });
 
-                    ListViewItem scoreEntry = new ListViewItem();
-                    scoreEntry.Text = scoreTextEntry[0];
+                    ListViewItem scoreEntryItem = new ListViewItem();
 
-                    ListViewItem.ListViewSubItem scoreEntryLevel = new ListViewItem.ListViewSubItem();
-                    scoreEntryLevel.Text = scoreTextEntry[1];
-                    scoreEntry.SubItems.Add(scoreEntryLevel);
+                    foreach(string scoreSubEntry in scoreTextEntry)
+                    {
+                        if(scoreTextEntry.FirstOrDefault().Equals(scoreSubEntry))
+                        {
+                            scoreEntryItem.Text = scoreSubEntry;
+                        }
+                        else
+                        {
+                            ListViewItem.ListViewSubItem scoreSubEntryItem = new ListViewItem.ListViewSubItem();
+                            scoreSubEntryItem.Text = scoreSubEntry;
+                            scoreEntryItem.SubItems.Add(scoreSubEntryItem);
+                        }
+                    }
 
-                    ListViewItem.ListViewSubItem scoreEntryName = new ListViewItem.ListViewSubItem();
-                    scoreEntryName.Text = scoreTextEntry[2];
-                    scoreEntry.SubItems.Add(scoreEntryName);
-
-                    ListViewItem.ListViewSubItem scoreEntryQuote = new ListViewItem.ListViewSubItem();
-                    scoreEntryQuote.Text = scoreTextEntry[3];
-                    scoreEntry.SubItems.Add(scoreEntryQuote);
-
-                    highScoreList.Items.Add(scoreEntry);
+                    highScoreList.Items.Add(scoreEntryItem);
                 }
             }
         }

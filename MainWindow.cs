@@ -23,12 +23,13 @@ namespace Tetris
         int combo = 0;
         int score = 0;
         int gainedScoreDebugVar = 0;
-        int clears = 0;
+        int totalClears, currentClears = 0;
         int level = 0;
         bool gameOver = false;
         bool gameRunning = false;
         int PieceSequenceIteration = 0;
         bool cheatUsed = false;
+        GameDifficulty currentGameDifficulty;
 
         readonly Color[] colorList = 
         {  
@@ -56,6 +57,8 @@ namespace Tetris
             pieceGhostPositionToolStripMenuItem.Checked = Properties.Settings.Default.ShowGhost;
             trackHighscoreToolStripMenuItem.Checked = Properties.Settings.Default.TrackHighScores;
             startingLevelTextBox.Text = Properties.Settings.Default.StartingLevel;
+            currentGameDifficulty = (GameDifficulty)Properties.Settings.Default.Difficulty;
+            SetGameDifficulty(currentGameDifficulty);
 
             if(startingLevelTextBox.Text != "")
             {
@@ -79,6 +82,7 @@ namespace Tetris
             TerminateGame(forceHideDialog: true);
 
             // Save current startingLevel to application settings
+            currentGameDifficulty = (GameDifficulty)Properties.Settings.Default.Difficulty;
             Properties.Settings.Default.StartingLevel = startingLevelTextBox.Text;
             Properties.Settings.Default.Save();
 
@@ -103,7 +107,8 @@ namespace Tetris
 
             combo = 0;
             score = 0;
-            clears = 0;
+            currentClears = 0;
+            totalClears = 0;
 
             timeElapsed = 0;
             currentPiece = 0;
@@ -116,7 +121,7 @@ namespace Tetris
             gainedScoreDebugVar = score;
             gainedPoints.Text = $"{gainedScoreDebugVar}";
             gainedPoints.ForeColor = Color.Green;
-            ClearsLabel.Text = clears.ToString();
+            ClearsLabel.Text = totalClears.ToString();
             TimeLabel.Text = $"{timeElapsed} sec.";
 
             ChangeTetrisBackground(level);
@@ -488,15 +493,28 @@ namespace Tetris
 
             UpdateScore(clearedFromDrop);
 
-            clears++;
-            ClearsLabel.Text = clears.ToString();
+            currentClears++;
+            totalClears ++;
+            ClearsLabel.Text = totalClears.ToString();
 
             // You're leveling by clearing lines, not by scoring points.
             // You level up by clearing[current level] * 10 lines.
-            if ((clears * (level + 1)) % 10 == 0)
+            int clearsToPassLevel;
+            switch (currentGameDifficulty)
+            {
+                case GameDifficulty.Begginer:
+                    clearsToPassLevel = (level + 1) * 5;
+                    break;
+                default:
+                    clearsToPassLevel = (level + 1) * 10;
+                    break;
+            }
+
+
+            if (currentClears >= clearsToPassLevel)
             {
                 LevelUp();
-                clears = 0;
+                currentClears = 0;
             }
 
             if (CheckForCompleteRows() > -1)
@@ -587,12 +605,34 @@ namespace Tetris
 
                 // Milliseconds per square fall
                 // Level 1 = 800 ms per square, level 2 = 716 ms per square, etc.
-                int[] levelSpeed =
+                int[] levelSpeed;
+                switch (currentGameDifficulty)
                 {
-                  // LEVEL
-                  // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-                    800, 716, 633, 555, 466, 383, 300, 216, 133, 115, 100, 090, 085, 080, 075, 070
-                };
+                    case GameDifficulty.Begginer:
+                        levelSpeed = new int[]
+                        {
+                            // LEVEL
+                            // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+                            800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 180, 160, 140
+                        };
+                        break;
+                    case GameDifficulty.Legend:
+                        levelSpeed = new int[]
+                        {
+                            // LEVEL
+                            // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+                            800, 716, 633, 555, 466, 383, 300, 216, 133, 115, 100, 090, 085, 080, 075, 070
+                        };
+                        break;
+                    default:
+                        levelSpeed = new int[]
+                        {
+                            // LEVEL
+                            // 0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+                            800, 730, 660, 590, 520, 450, 380, 310, 240, 205, 170, 145, 125, 115, 105, 100
+                        };
+                        break;
+                }
                 SpeedTimer.Interval = levelSpeed[level];
 
                 ChangeTetrisBackground(level);
@@ -823,15 +863,8 @@ namespace Tetris
 
                 if(trackHighscoreToolStripMenuItem.Checked && score > 0)
                 {
-                    if(cheatUsed)
-                    {
-                        // If user played with cheats, allow him to write his score with "Cheated" flag
-                        new GameOverScore(score, $"{(level + 1)}").ShowDialog();
-                    }
-                    else
-                    {
-                        new GameOverScore(score, $"{(level + 1)}").ShowDialog();
-                    }
+                    // If user played with cheats, allow him to write his score with "Cheated" flag
+                    new GameOverScore(score, $"{(level + 1)}", currentGameDifficulty, cheatUsed).ShowDialog();
                     
                 }
                 else
@@ -969,6 +1002,51 @@ namespace Tetris
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/KRtkovo-eu/Tetris/wiki");
+        }
+
+        public void SetGameDifficulty(GameDifficulty gameDifficulty)
+        {
+            begginerToolStripMenuItem.Checked = false;
+            standardToolStripMenuItem.Checked = false;
+            legendToolStripMenuItem.Checked = false;
+
+            switch(gameDifficulty)
+            {
+                case GameDifficulty.Begginer:
+                    begginerToolStripMenuItem.Checked = true;
+                    break;
+                case GameDifficulty.Standard:
+                    standardToolStripMenuItem.Checked = true;
+                    break;
+                case GameDifficulty.Legend:
+                    legendToolStripMenuItem.Checked = true;
+                    break;
+            }
+
+            Properties.Settings.Default.Difficulty = (int)gameDifficulty;
+            Properties.Settings.Default.Save();
+        }
+
+        private void begginerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetGameDifficulty(GameDifficulty.Begginer);
+        }
+
+        private void standardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetGameDifficulty(GameDifficulty.Standard);
+        }
+
+        private void legendToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetGameDifficulty(GameDifficulty.Legend);
+        }
+
+        public enum GameDifficulty
+        {
+            Begginer = 0,
+            Standard = 1,
+            Legend = 2
         }
     }   
 }

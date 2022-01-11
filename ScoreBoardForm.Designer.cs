@@ -37,6 +37,7 @@ namespace Tetris
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.noSelectButton2 = new Tetris.NoSelectButton();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,8 +65,9 @@ namespace Tetris
             // 
             this.highScoreList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader4,
             this.columnHeader2,
+            this.columnHeader4,
+            this.columnHeader5,
             this.columnHeader3});
             this.highScoreList.HideSelection = false;
             this.highScoreList.Location = new System.Drawing.Point(2, 41);
@@ -105,6 +107,10 @@ namespace Tetris
             this.noSelectButton2.UseVisualStyleBackColor = true;
             this.noSelectButton2.Click += new System.EventHandler(this.noSelectButton2_Click);
             // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Difficulty";
+            // 
             // ScoreBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,5 +140,6 @@ namespace Tetris
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private NoSelectButton noSelectButton2;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
