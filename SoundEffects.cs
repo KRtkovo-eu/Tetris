@@ -40,9 +40,9 @@ namespace Tetris
                         fs.Write(b, 0, b.Length);
                         fs.Close();
 
-                        System.Threading.Thread.Sleep(100);
+                        System.Threading.Thread.Sleep(500);
                     }
-                    
+
                     player.URL = fileInfo.Name;
                 }
 
